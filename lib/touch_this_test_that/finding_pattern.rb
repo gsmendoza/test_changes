@@ -9,7 +9,7 @@ module TouchThisTestThat
 
     def matching_path(path)
       path.sub(matching_pattern, substitution_pattern) if matches?(path)
-     end
+    end
 
     private
 
