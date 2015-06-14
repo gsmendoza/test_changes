@@ -1,3 +1,5 @@
+require 'touch_this_test_that/finding_pattern'
+
 module TouchThisTestThat
   class MatchFinder
     def initialize(options = {})
@@ -6,12 +8,19 @@ module TouchThisTestThat
     end
 
     def matching_paths
-      results = match_by_pattern.select do |pattern, _|
-        touched_path =~ pattern
+      finding_patterns = match_by_pattern.map do |matching_pattern, substitution_pattern|
+        FindingPattern.new(
+          matching_pattern: matching_pattern,
+          substitution_pattern: substitution_pattern
+        )
       end
 
-      results.map do |pattern, match|
-        touched_path.sub(pattern, match)
+      matching_finding_patterns = finding_patterns.select do |finding_pattern|
+        finding_pattern.matches?(touched_path)
+      end
+
+      matching_finding_patterns.map do |finding_pattern|
+        finding_pattern.matching_path(touched_path)
       end
     end
 
