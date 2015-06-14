@@ -1,7 +1,7 @@
 module TouchThisTestThat
   class Client
     def call
-      puts "\paths_changed_since_commit:"
+      puts "\paths_changed_since_commit #{commit}:"
       puts paths_changed_since_commit.inspect
 
       puts "\nmatches:"
@@ -16,7 +16,7 @@ module TouchThisTestThat
     private
 
     def commit
-      'HEAD'
+      @commit ||= 'HEAD'
     end
 
     def match_by_pattern
