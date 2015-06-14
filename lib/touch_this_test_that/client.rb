@@ -67,10 +67,10 @@ module TouchThisTestThat
 
       @matches =
         paths.product(finding_patterns).map do |path, finding_pattern|
-          finding_pattern.matching_path(path)
+          finding_pattern.matching_paths(path)
         end
 
-      @matches = @matches.compact.uniq
+      @matches = @matches.flatten.uniq
     end
   end
 end

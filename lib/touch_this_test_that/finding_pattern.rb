@@ -7,8 +7,12 @@ module TouchThisTestThat
       @substitution_pattern = options[:substitution_pattern]
     end
 
-    def matching_path(path)
-      path.sub(matching_pattern, substitution_pattern) if matches?(path)
+    def matching_paths(path)
+      if matches?(path)
+        [path.sub(matching_pattern, substitution_pattern)]
+      else
+        []
+      end
     end
 
     private
