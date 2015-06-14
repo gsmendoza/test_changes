@@ -3,6 +3,7 @@ module TouchThisTestThat
     def initialize(options)
       @commit = options[:commit] || 'HEAD'
       @test_tool_call_options =options[:test_tool_call_options]
+      @verbose = options[:verbose].nil? ? true : options[:verbose]
     end
 
     def call
@@ -21,11 +22,17 @@ module TouchThisTestThat
 
     private
 
-    attr_reader :commit, :test_tool_call_options
+    attr_reader :commit, :test_tool_call_options, :verbose
 
     def log(header, message)
-      puts "\n#{header}"
-      puts message
+      if verbose?
+        puts "\n#{header}"
+        puts message
+      end
+    end
+
+    def verbose?
+      verbose
     end
 
     def match_by_pattern

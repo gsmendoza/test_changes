@@ -6,7 +6,8 @@ describe TouchThisTestThat::Client do
   subject(:client) do
     described_class.new(
       commit: commit,
-      test_tool_call_options: test_tool_call_options
+      test_tool_call_options: test_tool_call_options,
+      verbose: false
     )
   end
 

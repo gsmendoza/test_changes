@@ -7,6 +7,8 @@ commit = ARGV.last
 test_tool_call_options = ARGV[0, ARGV.size - 1]
 
 client = TouchThisTestThat::Client.new(
-  commit: commit, test_tool_call_options: test_tool_call_options)
+  commit: commit,
+  test_tool_call_options: test_tool_call_options,
+  verbose: true)
 
 client.call
