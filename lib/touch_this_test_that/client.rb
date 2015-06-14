@@ -5,18 +5,15 @@ module TouchThisTestThat
     end
 
     def call
-      puts "\paths_changed_since_commit #{commit}:"
-      puts paths_changed_since_commit.inspect
+      log "paths_changed_since_commit #{commit}:",
+        paths_changed_since_commit.inspect
 
-      puts "\nmatches:"
-      puts matches.inspect
+      log "matches:", matches.inspect
 
-      puts "\nexisting_matches:"
-      puts existing_matches.inspect
+      log "existing_matches:", existing_matches.inspect
 
       if existing_matches.any?
-        puts "\ntest_tool_call:"
-        puts test_tool_call
+        log "test_tool_call:", test_tool_call
         system(test_tool_call)
       end
     end
@@ -24,6 +21,11 @@ module TouchThisTestThat
     private
 
     attr_reader :args
+
+    def log(header, message)
+      puts "\n#{header}"
+      puts message
+    end
 
     def commit
       @commit ||= args.last || 'HEAD'
