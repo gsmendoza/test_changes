@@ -10,7 +10,11 @@ module TouchThisTestThat
       puts "\nexisting_matches:"
       puts existing_matches.inspect
 
-      system("rspec #{existing_matches.join(' ')}") if existing_matches.any?
+      if existing_matches.any?
+        puts "\ntest_tool_call:"
+        puts test_tool_call
+        system(test_tool_call)
+      end
     end
 
     private
@@ -28,6 +32,10 @@ module TouchThisTestThat
     def paths_changed_since_commit
       @paths_changed_since_commit ||=
         `git diff --name-only --diff-filter=AMR #{commit}`.split("\n")
+    end
+
+    def test_tool_call
+      @test_tool_call ||= "rspec #{existing_matches.join(' ')}"
     end
 
     def existing_matches
