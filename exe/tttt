@@ -1,14 +1,13 @@
 #!/usr/bin/env ruby
 
+require 'touch_this_test_that/argv_wrapper'
 require 'touch_this_test_that/client'
 
-commit = ARGV.last
-
-test_tool_call_options = ARGV[0, ARGV.size - 1]
+argv_wrapper = TouchThisTestThat::ARGVWrapper.new(ARGV)
 
 client = TouchThisTestThat::Client.new(
-  commit: commit,
-  test_tool_call_options: test_tool_call_options,
+  commit: argv_wrapper.commit,
+  test_tool_call_options: argv_wrapper.test_tool_call_options,
   verbose: true)
 
 client.call

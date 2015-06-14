@@ -26,25 +26,6 @@ describe TouchThisTestThat::Client do
       "#{test_tool_command} #{matching_file_path}"
     end
 
-    context "where there are no arguments" do
-      let(:test_tool_call_options) { [] }
-      let(:commit) { nil }
-
-      let(:expected_commit) { 'HEAD' }
-
-      it "runs the test tool on tests matching files changed since HEAD" do
-        expect(subject)
-          .to receive(:`).with(git_diff_call)
-          .and_return(changed_file_path)
-
-        expect(subject).to receive(:system).with(test_tool_call)
-
-        expect(File).to receive(:exist?).with(matching_file_path).and_return(true)
-
-        client.call
-      end
-    end
-
     context "where the commit is the only argument" do
       let(:test_tool_call_options) { [] }
 
