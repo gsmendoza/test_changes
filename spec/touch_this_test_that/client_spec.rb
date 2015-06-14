@@ -3,11 +3,16 @@ require 'spec_helper'
 require 'touch_this_test_that/client'
 
 describe TouchThisTestThat::Client do
-  subject(:client) { described_class.new(*args) }
+  subject(:client) do
+    described_class.new(
+      commit: commit,
+      test_tool_call_options: test_tool_call_options
+    )
+  end
 
   describe "#call" do
     let(:git_diff_call) do
-      "git diff --name-only --diff-filter=AMR #{commit}"
+      "git diff --name-only --diff-filter=AMR #{expected_commit}"
     end
 
     let(:changed_file_path) { 'lib/touch_this_test_that/client.rb' }
@@ -21,9 +26,10 @@ describe TouchThisTestThat::Client do
     end
 
     context "where there are no arguments" do
-      let(:args) { [] }
+      let(:test_tool_call_options) { [] }
+      let(:commit) { nil }
 
-      let(:commit) { 'HEAD' }
+      let(:expected_commit) { 'HEAD' }
 
       it "runs the test tool on tests matching files changed since HEAD" do
         expect(subject)
@@ -39,9 +45,10 @@ describe TouchThisTestThat::Client do
     end
 
     context "where the commit is the only argument" do
-      let(:args) { [commit] }
+      let(:test_tool_call_options) { [] }
 
       let(:commit) { 'HEAD^' }
+      let(:expected_commit) { commit }
 
       it "runs the test tool on tests matching files changed since that commit" do
         expect(subject)
@@ -58,8 +65,10 @@ describe TouchThisTestThat::Client do
 
     context "where the arguments are the test tool options and the commit" do
       let(:option) { '--format=documentation' }
+      let(:test_tool_call_options) { [option] }
+
       let(:commit) { 'HEAD^' }
-      let(:args) { [option, commit] }
+      let(:expected_commit) { commit }
 
       let(:test_tool_call) do
         "#{test_tool_command} #{option} #{matching_file_path}"

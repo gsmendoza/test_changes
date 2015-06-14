@@ -1,7 +1,8 @@
 module TouchThisTestThat
   class Client
-    def initialize(*args)
-      @args = args
+    def initialize(options)
+      @commit = options[:commit] || 'HEAD'
+      @test_tool_call_options =options[:test_tool_call_options]
     end
 
     def call
@@ -20,15 +21,11 @@ module TouchThisTestThat
 
     private
 
-    attr_reader :args
+    attr_reader :commit, :test_tool_call_options
 
     def log(header, message)
       puts "\n#{header}"
       puts message
-    end
-
-    def commit
-      @commit ||= args.last || 'HEAD'
     end
 
     def match_by_pattern
@@ -49,10 +46,6 @@ module TouchThisTestThat
         test_tool_call_options,
         existing_matches
       ].flatten.compact.join(' ')
-    end
-
-    def test_tool_call_options
-      @test_tool_call_options ||= args[0, args.size - 1]
     end
 
     def existing_matches
