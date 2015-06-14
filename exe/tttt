@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require 'touch_this_test_that/client'
+
+TouchThisTestThat::Client.new.call
