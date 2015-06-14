@@ -9,11 +9,11 @@ describe TouchThisTestThat::Client do
       finding_patterns: [
         TouchThisTestThat::FindingPattern.new(
           matching_pattern: %r{^lib/(.+)\.rb},
-          substitution_pattern: 'spec/\1_spec.rb'
+          substitution_patterns: ['spec/\1_spec.rb']
         ),
         TouchThisTestThat::FindingPattern.new(
           matching_pattern: %r{^spec/(.+)_spec.rb},
-          substitution_pattern: 'spec/\1_spec.rb'
+          substitution_patterns: ['spec/\1_spec.rb']
         )
       ],
       commit: commit,

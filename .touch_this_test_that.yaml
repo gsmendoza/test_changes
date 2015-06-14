@@ -3,4 +3,5 @@ test_tool_command: rspec
 finding_patterns:
   ^lib/(.+)\.rb: spec/\1_spec.rb
   ^spec/(.+)_spec.rb: spec/\1_spec.rb
+
 verbose: true

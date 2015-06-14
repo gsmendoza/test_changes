@@ -1,18 +1,18 @@
 module TouchThisTestThat
   class FindingPattern
-    attr_reader :matching_pattern, :substitution_pattern
+    attr_reader :matching_pattern, :substitution_patterns
 
     def initialize(options = {})
       @matching_pattern = options[:matching_pattern]
-      @substitution_pattern = options[:substitution_pattern]
+      @substitution_patterns = options[:substitution_patterns]
     end
 
     def matching_paths(path)
-      if matches?(path)
-        [path.sub(matching_pattern, substitution_pattern)]
-      else
-        []
+      results = substitution_patterns.map do |substitution_pattern|
+        path.sub(matching_pattern, substitution_pattern) if matches?(path)
       end
+
+      results.compact
     end
 
     private

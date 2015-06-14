@@ -7,10 +7,10 @@ module TouchThisTestThat
     end
 
     def finding_patterns
-      config['finding_patterns'].map do |pattern, substitution_pattern|
+      config['finding_patterns'].map do |pattern, substitution_patterns|
         FindingPattern.new(
           matching_pattern: /#{pattern}/,
-          substitution_pattern: substitution_pattern
+          substitution_patterns: [substitution_patterns].flatten
         )
       end
     end
