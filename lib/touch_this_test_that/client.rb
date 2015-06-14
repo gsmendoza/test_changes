@@ -26,7 +26,7 @@ module TouchThisTestThat
     attr_reader :args
 
     def commit
-      @commit ||= args[0] || 'HEAD'
+      @commit ||= args.last || 'HEAD'
     end
 
     def match_by_pattern
@@ -42,7 +42,15 @@ module TouchThisTestThat
     end
 
     def test_tool_call
-      @test_tool_call ||= "rspec #{existing_matches.join(' ')}"
+      @test_tool_call ||= [
+        "rspec",
+        test_tool_call_options,
+        existing_matches
+      ].flatten.compact.join(' ')
+    end
+
+    def test_tool_call_options
+      @test_tool_call_options ||= args[0, args.size - 1]
     end
 
     def existing_matches
