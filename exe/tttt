@@ -2,4 +2,4 @@
 
 require 'touch_this_test_that/client'
 
-TouchThisTestThat::Client.new.call
+TouchThisTestThat::Client.new(*ARGV).call

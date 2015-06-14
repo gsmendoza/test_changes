@@ -1,5 +1,9 @@
 module TouchThisTestThat
   class Client
+    def initialize(*args)
+      @args = args
+    end
+
     def call
       puts "\paths_changed_since_commit #{commit}:"
       puts paths_changed_since_commit.inspect
@@ -19,13 +23,16 @@ module TouchThisTestThat
 
     private
 
+    attr_reader :args
+
     def commit
-      @commit ||= 'HEAD'
+      @commit ||= args[0] || 'HEAD'
     end
 
     def match_by_pattern
       @match_by_pattern ||= {
-        %r{^lib/(.+)\.rb} => 'spec/\1_spec.rb'
+        %r{^lib/(.+)\.rb} => 'spec/\1_spec.rb',
+        %r{^spec/(.+)_spec.rb} => 'spec/\1_spec.rb'
       }
     end
 
