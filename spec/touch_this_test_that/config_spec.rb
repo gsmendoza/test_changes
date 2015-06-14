@@ -38,8 +38,12 @@ describe TouchThisTestThat::Config do
   describe '#finding_patterns' do
     it "converts the keys in the finding_patterns config into regular expressions" do
       expect(config.finding_patterns.size).to eq(1)
-      expect(config.finding_patterns.keys.first).to eq(pattern_as_regular_expression)
-      expect(config.finding_patterns.values.first).to eq(match)
+      finding_pattern = config.finding_patterns.first
+
+      expect(finding_pattern).to be_a(TouchThisTestThat::FindingPattern)
+
+      expect(finding_pattern.matching_pattern).to eq(pattern_as_regular_expression)
+      expect(finding_pattern.substitution_pattern).to eq(match)
     end
   end
 end

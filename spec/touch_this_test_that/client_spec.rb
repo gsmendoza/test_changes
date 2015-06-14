@@ -6,10 +6,16 @@ describe TouchThisTestThat::Client do
   subject(:client) do
     described_class.new(
       test_tool_command: 'rspec',
-      finding_patterns: {
-        %r{^lib/(.+)\.rb} => 'spec/\1_spec.rb',
-        %r{^spec/(.+)_spec.rb} => 'spec/\1_spec.rb'
-      },
+      finding_patterns: [
+        TouchThisTestThat::FindingPattern.new(
+          matching_pattern: %r{^lib/(.+)\.rb},
+          substitution_pattern: 'spec/\1_spec.rb'
+        ),
+        TouchThisTestThat::FindingPattern.new(
+          matching_pattern: %r{^spec/(.+)_spec.rb},
+          substitution_pattern: 'spec/\1_spec.rb'
+        )
+      ],
       commit: commit,
       test_tool_call_options: test_tool_call_options,
       verbose: false

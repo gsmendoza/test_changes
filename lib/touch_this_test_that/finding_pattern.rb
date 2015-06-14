@@ -1,5 +1,7 @@
 module TouchThisTestThat
   class FindingPattern
+    attr_reader :matching_pattern, :substitution_pattern
+
     def initialize(options = {})
       @matching_pattern = options[:matching_pattern]
       @substitution_pattern = options[:substitution_pattern]
@@ -10,8 +12,6 @@ module TouchThisTestThat
      end
 
     private
-
-    attr_reader :matching_pattern, :substitution_pattern
 
     def matches?(path)
       path =~ matching_pattern

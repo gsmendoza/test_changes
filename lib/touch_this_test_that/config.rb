@@ -7,11 +7,12 @@ module TouchThisTestThat
     end
 
     def finding_patterns
-      pairs = config['finding_patterns'].map do |pattern, match|
-        [/#{pattern}/, match]
+      config['finding_patterns'].map do |pattern, substitution_pattern|
+        FindingPattern.new(
+          matching_pattern: /#{pattern}/,
+          substitution_pattern: substitution_pattern
+        )
       end
-
-      Hash[pairs]
     end
 
     def test_tool_command
