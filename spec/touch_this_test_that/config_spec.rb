@@ -14,7 +14,7 @@ describe TouchThisTestThat::Config do
   let(:config_contents) do
     {
       'test_tool_command' => test_tool_command,
-      'match_by_pattern' => {
+      'finding_patterns' => {
          pattern_as_string => match
       }
     }
@@ -35,11 +35,11 @@ describe TouchThisTestThat::Config do
     end
   end
 
-  describe '#match_by_pattern' do
-    it "converts the keys in the match_by_pattern config into regular expressions" do
-      expect(config.match_by_pattern.size).to eq(1)
-      expect(config.match_by_pattern.keys.first).to eq(pattern_as_regular_expression)
-      expect(config.match_by_pattern.values.first).to eq(match)
+  describe '#finding_patterns' do
+    it "converts the keys in the finding_patterns config into regular expressions" do
+      expect(config.finding_patterns.size).to eq(1)
+      expect(config.finding_patterns.keys.first).to eq(pattern_as_regular_expression)
+      expect(config.finding_patterns.values.first).to eq(match)
     end
   end
 end

@@ -4,7 +4,13 @@ module TouchThisTestThat
   class MatchFinder
     def initialize(options = {})
       @touched_path = options[:touched_path]
-      @match_by_pattern = options[:match_by_pattern]
+      @finding_patterns =
+        options[:finding_patterns].map do |matching_pattern, substitution_pattern|
+          FindingPattern.new(
+            matching_pattern: matching_pattern,
+            substitution_pattern: substitution_pattern
+          )
+      end
     end
 
     def matching_paths
@@ -17,16 +23,6 @@ module TouchThisTestThat
 
     private
 
-    attr_reader :touched_path, :match_by_pattern
-
-    def finding_patterns
-      @finding_patterns ||=
-        match_by_pattern.map do |matching_pattern, substitution_pattern|
-          FindingPattern.new(
-            matching_pattern: matching_pattern,
-            substitution_pattern: substitution_pattern
-          )
-        end
-    end
+    attr_reader :touched_path, :finding_patterns
   end
 end

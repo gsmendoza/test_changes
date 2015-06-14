@@ -6,8 +6,8 @@ module TouchThisTestThat
       @config_path = config_path
     end
 
-    def match_by_pattern
-      pairs = config['match_by_pattern'].map do |pattern, match|
+    def finding_patterns
+      pairs = config['finding_patterns'].map do |pattern, match|
         [/#{pattern}/, match]
       end
 

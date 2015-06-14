@@ -6,7 +6,7 @@ describe TouchThisTestThat::Client do
   subject(:client) do
     described_class.new(
       test_tool_command: 'rspec',
-      match_by_pattern: {
+      finding_patterns: {
         %r{^lib/(.+)\.rb} => 'spec/\1_spec.rb',
         %r{^spec/(.+)_spec.rb} => 'spec/\1_spec.rb'
       },

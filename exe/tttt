@@ -9,7 +9,7 @@ config = TouchThisTestThat::Config.new('.touch_this_test_that.yaml')
 
 client = TouchThisTestThat::Client.new(
   test_tool_command: config.test_tool_command,
-  match_by_pattern: config.match_by_pattern,
+  finding_patterns: config.finding_patterns,
   commit: argv_wrapper.commit,
   test_tool_call_options: argv_wrapper.test_tool_call_options,
   verbose: config.verbose)

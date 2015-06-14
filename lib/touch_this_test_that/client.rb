@@ -4,7 +4,7 @@ module TouchThisTestThat
   class Client
     def initialize(options)
       @test_tool_command = options[:test_tool_command]
-      @match_by_pattern = options[:match_by_pattern]
+      @finding_patterns = options[:finding_patterns]
       @commit = options[:commit]
       @test_tool_call_options = options[:test_tool_call_options]
       @verbose = options[:verbose]
@@ -27,7 +27,7 @@ module TouchThisTestThat
     private
 
     attr_reader :commit,
-      :match_by_pattern,
+      :finding_patterns,
       :test_tool_command,
       :test_tool_call_options,
       :verbose
@@ -68,7 +68,7 @@ module TouchThisTestThat
       @match_finders ||= paths_changed_since_commit.map do |path|
         MatchFinder.new(
           touched_path: path,
-          match_by_pattern: match_by_pattern
+          finding_patterns: finding_patterns
         )
       end
     end
