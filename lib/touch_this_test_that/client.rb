@@ -5,7 +5,7 @@ module TouchThisTestThat
       @match_by_pattern = options[:match_by_pattern]
       @commit = options[:commit]
       @test_tool_call_options = options[:test_tool_call_options]
-      @verbose = options[:verbose].nil? ? true : options[:verbose]
+      @verbose = options[:verbose]
     end
 
     def call

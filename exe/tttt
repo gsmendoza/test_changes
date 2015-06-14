@@ -12,6 +12,6 @@ client = TouchThisTestThat::Client.new(
   match_by_pattern: config.match_by_pattern,
   commit: argv_wrapper.commit,
   test_tool_call_options: argv_wrapper.test_tool_call_options,
-  verbose: true)
+  verbose: config.verbose)
 
 client.call
