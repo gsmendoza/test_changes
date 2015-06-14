@@ -8,24 +8,25 @@ module TouchThisTestThat
     end
 
     def matching_paths
-      finding_patterns = match_by_pattern.map do |matching_pattern, substitution_pattern|
-        FindingPattern.new(
-          matching_pattern: matching_pattern,
-          substitution_pattern: substitution_pattern
-        )
-      end
-
-      matching_finding_patterns = finding_patterns.select do |finding_pattern|
-        finding_pattern.matches?(touched_path)
-      end
-
-      matching_finding_patterns.map do |finding_pattern|
+      results = finding_patterns.map do |finding_pattern|
         finding_pattern.matching_path(touched_path)
       end
+
+      results.compact
     end
 
     private
 
     attr_reader :touched_path, :match_by_pattern
+
+    def finding_patterns
+      @finding_patterns ||=
+        match_by_pattern.map do |matching_pattern, substitution_pattern|
+          FindingPattern.new(
+            matching_pattern: matching_pattern,
+            substitution_pattern: substitution_pattern
+          )
+        end
+    end
   end
 end
