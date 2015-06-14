@@ -6,6 +6,11 @@ require 'touch_this_test_that/client'
 argv_wrapper = TouchThisTestThat::ARGVWrapper.new(ARGV)
 
 client = TouchThisTestThat::Client.new(
+  test_tool_command: 'rspec',
+  match_by_pattern: {
+    %r{^lib/(.+)\.rb} => 'spec/\1_spec.rb',
+    %r{^spec/(.+)_spec.rb} => 'spec/\1_spec.rb'
+  },
   commit: argv_wrapper.commit,
   test_tool_call_options: argv_wrapper.test_tool_call_options,
   verbose: true)

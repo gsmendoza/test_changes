@@ -5,6 +5,11 @@ require 'touch_this_test_that/client'
 describe TouchThisTestThat::Client do
   subject(:client) do
     described_class.new(
+      test_tool_command: 'rspec',
+      match_by_pattern: {
+        %r{^lib/(.+)\.rb} => 'spec/\1_spec.rb',
+        %r{^spec/(.+)_spec.rb} => 'spec/\1_spec.rb'
+      },
       commit: commit,
       test_tool_call_options: test_tool_call_options,
       verbose: false

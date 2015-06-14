@@ -1,6 +1,8 @@
 module TouchThisTestThat
   class Client
     def initialize(options)
+      @test_tool_command = options[:test_tool_command]
+      @match_by_pattern = options[:match_by_pattern]
       @commit = options[:commit]
       @test_tool_call_options = options[:test_tool_call_options]
       @verbose = options[:verbose].nil? ? true : options[:verbose]
@@ -22,7 +24,11 @@ module TouchThisTestThat
 
     private
 
-    attr_reader :commit, :test_tool_call_options, :verbose
+    attr_reader :commit,
+      :match_by_pattern,
+      :test_tool_command,
+      :test_tool_call_options,
+      :verbose
 
     def log(header, message)
       if verbose?
@@ -35,13 +41,6 @@ module TouchThisTestThat
       verbose
     end
 
-    def match_by_pattern
-      @match_by_pattern ||= {
-        %r{^lib/(.+)\.rb} => 'spec/\1_spec.rb',
-        %r{^spec/(.+)_spec.rb} => 'spec/\1_spec.rb'
-      }
-    end
-
     def paths_changed_since_commit
       @paths_changed_since_commit ||=
         `git diff --name-only --diff-filter=AMR #{commit}`.split("\n")
@@ -49,7 +48,7 @@ module TouchThisTestThat
 
     def test_tool_call
       @test_tool_call ||= [
-        "rspec",
+        test_tool_command,
         test_tool_call_options,
         existing_matches
       ].flatten.compact.join(' ')
