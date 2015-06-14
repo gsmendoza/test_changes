@@ -1,3 +1,5 @@
+require 'touch_this_test_that/match_finder'
+
 module TouchThisTestThat
   class Client
     def initialize(options)
@@ -59,19 +61,16 @@ module TouchThisTestThat
     end
 
     def matches
-      return @matches if @matches
+      @matches ||= match_finders.map(&:matching_paths).reduce(:+).compact.uniq
+    end
 
-      @matches = paths_changed_since_commit.map do |path|
-        matching_patterns = match_by_pattern.select do |pattern, _|
-          path =~ pattern
-        end
-
-        matching_patterns.map do |pattern, match|
-          path.sub(pattern, match)
-        end
+    def match_finders
+      @match_finders ||= paths_changed_since_commit.map do |path|
+        MatchFinder.new(
+          touched_path: path,
+          match_by_pattern: match_by_pattern
+        )
       end
-
-      @matches = @matches.reduce(:+).compact.uniq
     end
   end
 end
