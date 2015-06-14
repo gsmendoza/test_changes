@@ -1,0 +1,11 @@
+# Refer to https://github.com/bbatsov/rubocop/blob/master/config/default.yml
+# for the default rubocop configuration.
+
+Documentation:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 89
+
+StringLiterals:
+  Enabled: false
