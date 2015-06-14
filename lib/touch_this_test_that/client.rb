@@ -2,7 +2,7 @@ module TouchThisTestThat
   class Client
     def initialize(options)
       @commit = options[:commit] || 'HEAD'
-      @test_tool_call_options =options[:test_tool_call_options]
+      @test_tool_call_options = options[:test_tool_call_options]
       @verbose = options[:verbose].nil? ? true : options[:verbose]
     end
 
