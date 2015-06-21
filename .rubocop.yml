@@ -9,3 +9,6 @@ Metrics/LineLength:
 
 StringLiterals:
   Enabled: false
+
+Style/AlignParameters:
+  Enabled: false
