@@ -10,6 +10,7 @@ module TestChanges
       @verbose = options[:verbose]
     end
 
+    # rubocop:disable Metrics/AbcSize
     def call
       log "paths_changed_since_commit #{commit}:",
         paths_changed_since_commit.inspect
@@ -18,11 +19,12 @@ module TestChanges
 
       log "existing_matches:", existing_matches.inspect
 
-      if existing_matches.any?
-        log "test_tool_call:", test_tool_call
-        system(test_tool_call)
-      end
+      return if existing_matches.empty?
+
+      log "test_tool_call:", test_tool_call
+      system(test_tool_call)
     end
+    # rubocop:enable Metrics/AbcSize
 
     private
 
@@ -33,10 +35,10 @@ module TestChanges
       :verbose
 
     def log(header, message)
-      if verbose?
-        puts "\n#{header}"
-        puts message
-      end
+      return unless verbose?
+
+      puts "\n#{header}"
+      puts message
     end
 
     def verbose?
