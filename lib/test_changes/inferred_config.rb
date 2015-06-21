@@ -11,9 +11,9 @@ module TestChanges
         if File.exists?('./bin/rspec')
           return use_rspec_rails('./bin/rspec')
         elsif File.directory?('./spec')
-          return use_rspec_rails('bundle exec rspec')
+          return use_testunit_rails('bundle exec rspec')
         elsif File.directory?('./test')
-          return use_rspec_rails('bundle exec ruby -Itest')
+          return use_testunit_rails('bundle exec ruby -Itest')
         end
       end
 
