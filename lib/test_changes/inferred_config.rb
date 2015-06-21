@@ -7,8 +7,8 @@ module TestChanges
     attr_reader :config_path
 
     def initialize
-      if File.exists?('./config/application.rb')
-        if File.exists?('./bin/rspec')
+      if File.exist?('./config/application.rb')
+        if File.exist?('./bin/rspec')
           return use_rspec_rails('./bin/rspec')
         elsif File.directory?('./spec')
           return use_rspec_rails('bundle exec rspec')
@@ -17,7 +17,7 @@ module TestChanges
         end
       end
 
-      raise TestChanges::Error.new("No .test_changes.yaml found")
+      fail TestChanges::Error, "No .test_changes.yaml found"
     end
 
     def finding_patterns
@@ -28,7 +28,7 @@ module TestChanges
       true
     end
 
-  private
+    private
 
     def use_rspec_rails(bin)
       @config_path = '[inferred: rspec_rails]'

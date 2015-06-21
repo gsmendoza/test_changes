@@ -10,9 +10,9 @@ describe TestChanges::InferredConfig do
   end
 
   describe 'rspec-rails' do
-    let(:config) {
+    let(:config) do
       Dir.chdir(fixture_path('rspec-rails')) { subject }
-    }
+    end
 
     it 'sets the test tool command' do
       expect(config.test_tool_command).to eql './bin/rspec'
@@ -24,9 +24,9 @@ describe TestChanges::InferredConfig do
   end
 
   describe 'blank' do
-    let(:config) {
+    let(:config) do
       Dir.chdir(fixture_path('blank')) { subject }
-    }
+    end
 
     it 'raises an error' do
       expect { config }.to raise_error TestChanges::Error

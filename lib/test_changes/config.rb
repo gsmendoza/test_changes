@@ -8,7 +8,7 @@ module TestChanges
     end
 
     def exists?
-      File.exists?(@config_path)
+      File.exist?(@config_path)
     end
 
     def finding_patterns
