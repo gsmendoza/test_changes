@@ -1,3 +1,4 @@
+require 'test_changes/finding_pattern'
 require 'yaml'
 
 module TestChanges
