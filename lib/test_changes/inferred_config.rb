@@ -16,8 +16,6 @@ module TestChanges
           return use_testunit_rails('bundle exec ruby -Itest')
         end
       end
-
-      fail TestChanges::Error, "No .test_changes.yaml found"
     end
 
     def finding_patterns

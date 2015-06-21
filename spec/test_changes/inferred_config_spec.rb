@@ -22,14 +22,4 @@ describe TestChanges::InferredConfig do
       expect(config.finding_patterns_map).to be_a Hash
     end
   end
-
-  context 'blank' do
-    let(:config) do
-      Dir.chdir(fixture_path('blank')) { subject }
-    end
-
-    it 'raises an error' do
-      expect { config }.to raise_error TestChanges::Error
-    end
-  end
 end
