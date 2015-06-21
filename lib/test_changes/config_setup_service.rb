@@ -5,23 +5,15 @@ module TestChanges
     def self.call
       config = Config.new('.test_changes.yaml')
 
-      unless config.exists?
-        config = (
-          if File.exist?('./config/application.rb')
-            if File.exist?('./bin/rspec')
-              use_rspec_rails('./bin/rspec')
-            elsif File.directory?('./spec')
-              use_rspec_rails('bundle exec rspec')
-            elsif File.directory?('./test')
-              use_testunit_rails('bundle exec ruby -Itest')
-            end
-          else
-            fail TestChanges::Error, "No .test_changes.yaml found"
-          end
-        )
+      return config if config.exists?
+
+      if File.exist?('./config/application.rb')
+        return use_rspec_rails('./bin/rspec') if File.exist?('./bin/rspec')
+        return use_rspec_rails('bundle exec rspec') if File.directory?('./spec')
+        return use_testunit_rails('bundle exec ruby -Itest') if File.directory?('./test')
       end
 
-      config
+      fail TestChanges::Error, "No .test_changes.yaml found"
     end
 
     private
