@@ -1,17 +1,17 @@
 require 'spec_helper'
 
-require 'touch_this_test_that/client'
+require 'test_changes/client'
 
-describe TouchThisTestThat::Client do
+describe TestChanges::Client do
   subject(:client) do
     described_class.new(
       test_tool_command: 'rspec',
       finding_patterns: [
-        TouchThisTestThat::FindingPattern.new(
+        TestChanges::FindingPattern.new(
           matching_pattern: %r{^lib/(.+)\.rb},
           substitution_patterns: ['spec/\1_spec.rb']
         ),
-        TouchThisTestThat::FindingPattern.new(
+        TestChanges::FindingPattern.new(
           matching_pattern: %r{^spec/(.+)_spec.rb},
           substitution_patterns: ['spec/\1_spec.rb']
         )
@@ -27,11 +27,11 @@ describe TouchThisTestThat::Client do
       "git diff --name-only --diff-filter=AMR #{expected_commit}"
     end
 
-    let(:changed_file_path) { 'lib/touch_this_test_that/client.rb' }
+    let(:changed_file_path) { 'lib/test_changes/client.rb' }
 
     let(:test_tool_command) { 'rspec' }
 
-    let(:matching_file_path) { 'spec/touch_this_test_that/client_spec.rb' }
+    let(:matching_file_path) { 'spec/test_changes/client_spec.rb' }
 
     let(:test_tool_call) do
       "#{test_tool_command} #{matching_file_path}"

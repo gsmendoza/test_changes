@@ -1,6 +1,6 @@
 require 'yaml'
 
-module TouchThisTestThat
+module TestChanges
   class Config
     def initialize(config_path)
       @config_path = config_path

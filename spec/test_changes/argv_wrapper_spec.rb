@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-require 'touch_this_test_that/argv_wrapper'
+require 'test_changes/argv_wrapper'
 
-describe TouchThisTestThat::ARGVWrapper do
+describe TestChanges::ARGVWrapper do
   let(:default_commit) { 'HEAD' }
 
   subject(:wrapper) { described_class.new(argv) }

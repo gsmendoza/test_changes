@@ -2,9 +2,9 @@ require 'fileutils'
 require 'yaml'
 require 'spec_helper'
 
-require 'touch_this_test_that/config'
+require 'test_changes/config'
 
-describe TouchThisTestThat::Config do
+describe TestChanges::Config do
   let(:test_tool_command) { 'rspec' }
 
   let(:pattern_as_string) { '^lib/(.+)\.rb' }
@@ -18,7 +18,7 @@ describe TouchThisTestThat::Config do
     }
   end
 
-  let(:config_path) { 'tmp/touch_this_test_that.yaml' }
+  let(:config_path) { 'tmp/test_changes.yaml' }
 
   subject(:config) { described_class.new(config_path) }
 
@@ -41,7 +41,7 @@ describe TouchThisTestThat::Config do
         expect(config.finding_patterns.size).to eq(1)
         finding_pattern = config.finding_patterns.first
 
-        expect(finding_pattern).to be_a(TouchThisTestThat::FindingPattern)
+        expect(finding_pattern).to be_a(TestChanges::FindingPattern)
 
         expect(finding_pattern.matching_pattern).to eq(pattern_as_regular_expression)
         expect(finding_pattern.substitution_patterns).to eq([substitution_pattern])

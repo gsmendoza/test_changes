@@ -1,4 +1,4 @@
-module TouchThisTestThat
+module TestChanges
   class FindingPattern
     attr_reader :matching_pattern, :substitution_patterns
 

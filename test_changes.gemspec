@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'touch_this_test_that/version'
+require 'test_changes/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "touch_this_test_that"
-  spec.version       = TouchThisTestThat::VERSION
+  spec.name          = "test_changes"
+  spec.version       = TestChanges::VERSION
   spec.authors       = ["George Mendoza"]
   spec.email         = ["gsmendoza@gmail.com"]
 

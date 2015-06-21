@@ -1,6 +1,6 @@
-require 'touch_this_test_that/finding_pattern'
+require 'test_changes/finding_pattern'
 
-module TouchThisTestThat
+module TestChanges
   class Client
     def initialize(options)
       @test_tool_command = options[:test_tool_command]

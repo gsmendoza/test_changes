@@ -1,4 +1,4 @@
-module TouchThisTestThat
+module TestChanges
   class ARGVWrapper
     def initialize(argv)
       @argv = argv
