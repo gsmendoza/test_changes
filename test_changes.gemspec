@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["George Mendoza"]
   spec.email         = ["gsmendoza@gmail.com"]
 
-  spec.summary       = %(Touch This Test That)
+  spec.summary       = %(Test Changes)
 
   spec.description =
     %(Run only the tests affected by files changed since a given commit.)
