@@ -84,6 +84,8 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
+IMPORTANT: Please use [RuboCop](https://github.com/bbatsov/rubocop) and [Overcommit](https://github.com/brigade/overcommit) when submitting pull requests.
+
 1. Fork it ( https://github.com/gsmendoza/test_changes/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
