@@ -9,7 +9,7 @@ describe TestChanges::InferredConfig do
     File.join(File.expand_path('../../../spec/fixtures', __FILE__), fixture)
   end
 
-  describe 'rspec-rails' do
+  context 'rspec-rails' do
     let(:config) do
       Dir.chdir(fixture_path('rspec-rails')) { subject }
     end
@@ -23,7 +23,7 @@ describe TestChanges::InferredConfig do
     end
   end
 
-  describe 'blank' do
+  context 'blank' do
     let(:config) do
       Dir.chdir(fixture_path('blank')) { subject }
     end
