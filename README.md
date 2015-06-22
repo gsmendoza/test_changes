@@ -2,6 +2,8 @@
 
 Test files that have changed since a given commit.
 
+[![Status](https://travis-ci.org/gsmendoza/test_changes.svg?branch=master)](https://travis-ci.org/gsmendoza/test_changes "See test builds")
+
 ## Requirements
 
 * [Git](https://git-scm.com)
