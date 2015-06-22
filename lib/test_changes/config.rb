@@ -1,3 +1,4 @@
+require 'test_changes/finding_pattern'
 require 'yaml'
 
 module TestChanges
@@ -6,13 +7,12 @@ module TestChanges
       @config_path = config_path
     end
 
+    def exists?
+      File.exist?(@config_path)
+    end
+
     def finding_patterns
-      config['finding_patterns'].map do |pattern, substitution_patterns|
-        FindingPattern.new(
-          matching_pattern: /#{pattern}/,
-          substitution_patterns: [substitution_patterns].flatten
-        )
-      end
+      FindingPattern.build config['finding_patterns']
     end
 
     def test_tool_command

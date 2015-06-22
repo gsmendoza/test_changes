@@ -15,6 +15,15 @@ module TestChanges
       results.compact
     end
 
+    def self.build(patterns)
+      patterns.map do |pattern, substitution_patterns|
+        new(
+          matching_pattern: /#{pattern}/,
+          substitution_patterns: [substitution_patterns].flatten
+        )
+      end
+    end
+
     private
 
     def matches?(path)

@@ -3,9 +3,12 @@
 require 'test_changes/argv_wrapper'
 require 'test_changes/client'
 require 'test_changes/config'
+require 'test_changes/inferred_config'
+require 'test_changes/config_setup_service'
 
 argv_wrapper = TestChanges::ARGVWrapper.new(ARGV)
-config = TestChanges::Config.new('.test_changes.yaml')
+
+config = TestChanges::ConfigSetupService.call
 
 client = TestChanges::Client.new(
   test_tool_command: config.test_tool_command,
