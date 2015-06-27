@@ -9,21 +9,15 @@ module TestChanges
     end
 
     def call
-      Runner.new(
-        name: name,
-        finding_patterns: finding_patterns)
+      return config.runners.first unless argv_wrapper.runner_name
+
+      config.runners.find do |runner|
+        runner.name == argv_wrapper.runner_name
+      end
     end
 
     private
 
     attr_reader :config, :argv_wrapper
-
-    def name
-      argv_wrapper.runner_name || config.runner_name
-    end
-
-    def finding_patterns
-      config.finding_patterns
-    end
   end
 end

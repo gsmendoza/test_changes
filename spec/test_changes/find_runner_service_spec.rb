@@ -7,10 +7,19 @@ describe TestChanges::FindRunnerService do
 
   let(:finding_patterns) { [double(:finding_pattern)] }
 
+  let(:config_runners) do
+    [
+      double(:runner,
+        finding_patterns: finding_patterns,
+        name: default_runner_name),
+      double(:runner,
+        finding_patterns: finding_patterns,
+        name: provided_runner_name)
+    ]
+  end
+
   let(:config) do
-    double(:config,
-      finding_patterns: finding_patterns,
-      runner_name: default_runner_name)
+    double(:config, runners: config_runners)
   end
 
   let(:provided_runner_name) { nil }
@@ -30,7 +39,7 @@ describe TestChanges::FindRunnerService do
       .and_return(config)
   end
 
-  describe "#name" do
+  describe "#call" do
     context "where the user did not provide a runner" do
       let(:provided_runner_name) { nil }
 
@@ -49,12 +58,6 @@ describe TestChanges::FindRunnerService do
       it "is the runner from the config matching the one provided" do
         expect(runner.name).to eq(provided_runner_name)
       end
-    end
-  end
-
-  describe "#finding_patterns" do
-    it "are delegated from the config" do
-      expect(runner.finding_patterns).to eq(finding_patterns)
     end
   end
 end

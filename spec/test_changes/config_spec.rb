@@ -19,24 +19,28 @@ describe TestChanges::Config do
 
   subject(:config) { described_class.new(config_path) }
 
+  let(:runner) do
+    expect(config.runners.size).to eq(1)
+    config.runners.first
+  end
+
   before do
     FileUtils.mkdir_p 'tmp'
     File.write(config_path, YAML.dump(config_contents))
   end
 
-  describe '#runner_name' do
+  describe '#runners' do
     let(:finding_patterns_hash) { {} }
 
-    it "is the runner_name from the yaml file" do
-      expect(config.runner_name).to eq(runner_name)
+    it "are the runners from the yaml file" do
+      expect(runner.name).to eq(runner_name)
     end
   end
 
   describe '#finding_patterns' do
     shared_examples "builds finding_patterns from the config" do
       it "builds finding_patterns from the config" do
-        expect(config.finding_patterns.size).to eq(1)
-        finding_pattern = config.finding_patterns.first
+        finding_pattern = runner.finding_patterns.first
 
         expect(finding_pattern).to be_a(TestChanges::FindingPattern)
 
@@ -55,7 +59,7 @@ describe TestChanges::Config do
       include_examples "builds finding_patterns from the config"
     end
 
-    context "where the substitution_patterns is a single pattern", :focus do
+    context "where the substitution_patterns is a single pattern" do
       let(:substitution_patterns) { substitution_pattern }
 
       include_examples "builds finding_patterns from the config"

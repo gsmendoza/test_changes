@@ -33,14 +33,16 @@ Add a `.test-changes.yml` configuration file to your repo. Example:
 rspec:
   ^lib/(.+)\.rb: spec/\1_spec.rb
   ^spec/(.+)_spec.rb: spec/\1_spec.rb
+rubocop:
+  ^(.+)\.rb: \1.rb
 ```
 
 The options
 
-* The root key - The command for running the tests.
-  Example: `rspec`, `zeus rspec`.
+* The keys - The commands for running the tests.
+  Example: `rspec`, `zeus rspec`, `rubocop`.
 
-* The root value - The finding patterns. If the name of a changed file matches
+* The values - The finding patterns. If the name of a changed file matches
   the regular expression, `test_changes` will test the file's matching tests.
   Can accept an array of tests:
 

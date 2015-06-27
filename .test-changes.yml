@@ -1,3 +1,5 @@
 rspec:
   ^lib/(.+)\.rb: spec/\1_spec.rb
   ^spec/(.+)_spec.rb: spec/\1_spec.rb
+rubocop:
+  ^(.+)\.rb: \1.rb
