@@ -1,4 +1,5 @@
 require 'slop'
+require 'test_changes'
 
 module TestChanges
   class ARGVWrapper
@@ -25,9 +26,13 @@ module TestChanges
     attr_reader :argv
 
     def slop_options
-      Slop.parse(argv) do
+      Slop.parse(argv, help: true, strict: true, banner: banner) do
         on 'c', 'commit=', 'Git commit', default: 'HEAD'
       end
+    end
+
+    def banner
+      "#{SUMMARY}: #{DESCRIPTION}"
     end
   end
 end

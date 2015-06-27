@@ -1,6 +1,7 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require 'test_changes'
 require 'test_changes/version'
 
 Gem::Specification.new do |spec|
@@ -9,10 +10,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["George Mendoza"]
   spec.email         = ["gsmendoza@gmail.com"]
 
-  spec.summary       = %(Test Changes)
-
-  spec.description =
-    %(Run only the tests affected by files changed since a given commit.)
+  spec.summary       = TestChanges::SUMMARY
+  spec.description   = TestChanges::DESCRIPTION
 
   spec.homepage      = "https://github.com/gsmendoza/test_changes"
   spec.license       = "MIT"
