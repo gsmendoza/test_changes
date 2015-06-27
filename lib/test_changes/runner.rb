@@ -1,7 +1,9 @@
+require 'test_changes/config_setup_service'
+
 module TestChanges
   class Runner
-    def initialize(config, argv_wrapper)
-      @config = config
+    def initialize(argv_wrapper)
+      @config = ConfigSetupService.call
       @argv_wrapper = argv_wrapper
     end
 

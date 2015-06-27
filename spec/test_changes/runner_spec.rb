@@ -22,7 +22,13 @@ describe TestChanges::Runner do
       test_tool_call_options: call_options)
   end
 
-  subject(:runner) { described_class.new(config, argv_wrapper) }
+  subject(:runner) { described_class.new(argv_wrapper) }
+
+  before do
+    allow(TestChanges::ConfigSetupService)
+      .to receive(:call)
+      .and_return(config)
+  end
 
   describe "#name" do
     context "where the user did not provide a runner" do
