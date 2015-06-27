@@ -13,6 +13,10 @@ module TestChanges
       argv_wrapper.test_tool_call_options
     end
 
+    def finding_patterns
+      config.finding_patterns
+    end
+
     private
 
     attr_reader :config, :argv_wrapper

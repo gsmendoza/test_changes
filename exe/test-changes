@@ -13,7 +13,7 @@ runner = TestChanges::Runner.new(config, argv_wrapper)
 
 client = TestChanges::Client.new(
   test_tool_command: runner.name,
-  finding_patterns: config.finding_patterns,
+  finding_patterns: runner.finding_patterns,
   commit: argv_wrapper.commit,
   test_tool_call_options: runner.call_options,
   verbose: argv_wrapper.verbose?)

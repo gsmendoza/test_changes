@@ -5,8 +5,12 @@ require 'test_changes/runner'
 describe TestChanges::Runner do
   let(:default_runner_name) { 'rspec' }
 
+  let(:finding_patterns) { [double(:finding_pattern)] }
+
   let(:config) do
-    double(:config, test_tool_command: default_runner_name)
+    double(:config,
+      finding_patterns: finding_patterns,
+      test_tool_command: default_runner_name)
   end
 
   let(:call_options) { ['--format=documentation'] }
@@ -45,6 +49,12 @@ describe TestChanges::Runner do
   describe "#call_options" do
     it "are delegated from the argv_wrapper" do
       expect(runner.call_options).to eq(call_options)
+    end
+  end
+
+  describe "#finding_patterns" do
+    it "are delegated from the config" do
+      expect(runner.finding_patterns).to eq(finding_patterns)
     end
   end
 end
