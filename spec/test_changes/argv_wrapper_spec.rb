@@ -59,19 +59,19 @@ describe TestChanges::ARGVWrapper do
     end
   end
 
-  describe '#test_tool_command' do
+  describe '#runner_name' do
     context "if not provided" do
       let(:argv) { [] }
 
-      it { expect(wrapper.test_tool_command).to be_nil }
+      it { expect(wrapper.runner_name).to be_nil }
     end
 
     context "if provided" do
-      let(:test_tool_command) { 'rubocop' }
-      let(:argv) { ['-r', test_tool_command] }
+      let(:runner_name) { 'rubocop' }
+      let(:argv) { ['-r', runner_name] }
 
       it "should be the provided test tool command" do
-        expect(wrapper.test_tool_command).to eq(test_tool_command)
+        expect(wrapper.runner_name).to eq(runner_name)
       end
     end
   end

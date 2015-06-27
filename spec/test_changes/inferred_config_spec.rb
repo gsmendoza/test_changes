@@ -6,17 +6,17 @@ require 'test_changes/inferred_config'
 
 describe TestChanges::InferredConfig do
   let(:finding_patterns_map) { { 'foo' => 'bar' } }
-  let(:test_tool_command) { './bin/rspec' }
+  let(:runner_name) { './bin/rspec' }
 
   subject(:config) do
     described_class.new(
       finding_patterns_map: finding_patterns_map,
-      test_tool_command: test_tool_command
+      runner_name: runner_name
     )
   end
 
   it 'sets the test tool command' do
-    expect(config.test_tool_command).to eql './bin/rspec'
+    expect(config.runner_name).to eql './bin/rspec'
   end
 
   it 'sets finding patterns' do

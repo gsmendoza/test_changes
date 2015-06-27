@@ -22,7 +22,7 @@ module TestChanges
 
     def self.use_rspec_rails(bin)
       InferredConfig.new(
-        test_tool_command: bin,
+        runner_name: bin,
         project_type_name: 'rspec_rails',
         finding_patterns_map: {
           '^app/(models)/(.+).rb' => 'spec/\1/\2_spec.rb',
@@ -33,7 +33,7 @@ module TestChanges
 
     def self.use_testunit_rails(bin)
       InferredConfig.new(
-        test_tool_command: bin,
+        runner_name: bin,
         project_type_name: 'testunit_rails',
         finding_patterns_map: {
           '^app/(models)/(.+).rb' => 'test/\1/\2_test.rb',

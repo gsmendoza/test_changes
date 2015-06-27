@@ -23,7 +23,7 @@ module TestChanges
       end
     end
 
-    def test_tool_command
+    def runner_name
       slop_options[:runner]
     end
 

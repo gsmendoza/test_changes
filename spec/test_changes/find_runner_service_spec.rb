@@ -10,7 +10,7 @@ describe TestChanges::FindRunnerService do
   let(:config) do
     double(:config,
       finding_patterns: finding_patterns,
-      test_tool_command: default_runner_name)
+      runner_name: default_runner_name)
   end
 
   let(:call_options) { ['--format=documentation'] }
@@ -18,7 +18,7 @@ describe TestChanges::FindRunnerService do
 
   let(:argv_wrapper) do
     double(:argv_wrapper,
-      test_tool_command: provided_runner_name,
+      runner_name: provided_runner_name,
       test_tool_call_options: call_options)
   end
 

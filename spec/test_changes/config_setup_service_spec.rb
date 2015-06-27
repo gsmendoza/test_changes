@@ -18,7 +18,7 @@ describe TestChanges::ConfigSetupService do
       let(:project_type) { 'rspec-rails' }
 
       it 'sets the test tool command' do
-        expect(config.test_tool_command).to eql './bin/rspec'
+        expect(config.runner_name).to eql './bin/rspec'
       end
 
       it 'sets finding patterns' do

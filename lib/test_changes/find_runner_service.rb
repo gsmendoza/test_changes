@@ -20,7 +20,7 @@ module TestChanges
     attr_reader :config, :argv_wrapper
 
     def name
-      argv_wrapper.test_tool_command || config.test_tool_command
+      argv_wrapper.runner_name || config.runner_name
     end
 
     def call_options

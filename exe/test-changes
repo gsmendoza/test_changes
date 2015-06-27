@@ -8,7 +8,7 @@ argv_wrapper = TestChanges::ARGVWrapper.new(ARGV)
 runner = TestChanges::FindRunnerService.new(argv_wrapper).call
 
 client = TestChanges::Client.new(
-  test_tool_command: runner.name,
+  runner_name: runner.name,
   finding_patterns: runner.finding_patterns,
   commit: argv_wrapper.commit,
   test_tool_call_options: runner.call_options,

@@ -5,14 +5,14 @@ require 'spec_helper'
 require 'test_changes/config'
 
 describe TestChanges::Config do
-  let(:test_tool_command) { 'rspec' }
+  let(:runner_name) { 'rspec' }
 
   let(:pattern_as_string) { '^lib/(.+)\.rb' }
   let(:pattern_as_regular_expression) { %r{^lib/(.+)\.rb} }
   let(:substitution_pattern) { 'spec/\1_spec.rb' }
 
   let(:config_contents) do
-    { test_tool_command => finding_patterns_hash }
+    { runner_name => finding_patterns_hash }
   end
 
   let(:config_path) { 'tmp/test-changes.yml' }
@@ -24,11 +24,11 @@ describe TestChanges::Config do
     File.write(config_path, YAML.dump(config_contents))
   end
 
-  describe '#test_tool_command' do
+  describe '#runner_name' do
     let(:finding_patterns_hash) { {} }
 
-    it "is the test_tool_command from the yaml file" do
-      expect(config.test_tool_command).to eq(test_tool_command)
+    it "is the runner_name from the yaml file" do
+      expect(config.runner_name).to eq(runner_name)
     end
   end
 

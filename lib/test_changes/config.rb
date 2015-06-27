@@ -12,10 +12,10 @@ module TestChanges
     end
 
     def finding_patterns
-      FindingPattern.build config[test_tool_command]
+      FindingPattern.build config[runner_name]
     end
 
-    def test_tool_command
+    def runner_name
       config.keys.first
     end
 
