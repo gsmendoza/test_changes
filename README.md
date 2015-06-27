@@ -35,8 +35,6 @@ test_tool_command: rspec
 finding_patterns:
   ^lib/(.+)\.rb: spec/\1_spec.rb
   ^spec/(.+)_spec.rb: spec/\1_spec.rb
-
-verbose: true
 ```
 
 The options
@@ -54,8 +52,6 @@ The options
       - spec/test_changes_spec.rb
       - spec/test_changes/client_spec.rb
     ```
-
-* `verbose` - Set the verbose level of output.
 
 ## Usage
 

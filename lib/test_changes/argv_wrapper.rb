@@ -21,6 +21,10 @@ module TestChanges
       end
     end
 
+    def verbose?
+      !slop_options.quiet?
+    end
+
     private
 
     attr_reader :argv
@@ -28,6 +32,7 @@ module TestChanges
     def slop_options
       Slop.parse(argv, help: true, strict: true, banner: banner) do
         on 'c', 'commit=', 'Git commit', default: 'HEAD'
+        on 'q', 'quiet', 'Do not print output', default: false
       end
     end
 

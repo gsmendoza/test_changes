@@ -19,10 +19,6 @@ module TestChanges
       config['test_tool_command']
     end
 
-    def verbose
-      config['verbose']
-    end
-
     private
 
     attr_reader :config_path

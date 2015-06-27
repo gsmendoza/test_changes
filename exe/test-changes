@@ -15,6 +15,6 @@ client = TestChanges::Client.new(
   finding_patterns: config.finding_patterns,
   commit: argv_wrapper.commit,
   test_tool_call_options: argv_wrapper.test_tool_call_options,
-  verbose: config.verbose)
+  verbose: argv_wrapper.verbose?)
 
 client.call

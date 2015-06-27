@@ -17,9 +17,5 @@ module TestChanges
     def finding_patterns
       FindingPattern.build finding_patterns_map
     end
-
-    def verbose
-      true
-    end
   end
 end

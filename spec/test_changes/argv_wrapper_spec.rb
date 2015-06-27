@@ -44,4 +44,16 @@ describe TestChanges::ARGVWrapper do
       end
     end
   end
+
+  describe "#verbose" do
+    context "by default" do
+      let(:argv) { [] }
+      it { expect(wrapper.verbose?).to eq(true) }
+    end
+
+    context "where --quiet option is given" do
+      let(:argv) { ['--quiet'] }
+      it { expect(wrapper.verbose?).to eq(false) }
+    end
+  end
 end
