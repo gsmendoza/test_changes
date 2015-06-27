@@ -11,8 +11,7 @@ module TestChanges
     def call
       Runner.new(
         name: name,
-        finding_patterns: finding_patterns,
-        call_options: call_options)
+        finding_patterns: finding_patterns)
     end
 
     private
@@ -21,10 +20,6 @@ module TestChanges
 
     def name
       argv_wrapper.runner_name || config.runner_name
-    end
-
-    def call_options
-      argv_wrapper.runner_call_options
     end
 
     def finding_patterns

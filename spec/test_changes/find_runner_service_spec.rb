@@ -13,13 +13,11 @@ describe TestChanges::FindRunnerService do
       runner_name: default_runner_name)
   end
 
-  let(:call_options) { ['--format=documentation'] }
   let(:provided_runner_name) { nil }
 
   let(:argv_wrapper) do
     double(:argv_wrapper,
-      runner_name: provided_runner_name,
-      runner_call_options: call_options)
+      runner_name: provided_runner_name)
   end
 
   subject(:service) { described_class.new(argv_wrapper) }
@@ -51,12 +49,6 @@ describe TestChanges::FindRunnerService do
       it "is the runner from the config matching the one provided" do
         expect(runner.name).to eq(provided_runner_name)
       end
-    end
-  end
-
-  describe "#call_options" do
-    it "are delegated from the argv_wrapper" do
-      expect(runner.call_options).to eq(call_options)
     end
   end
 
