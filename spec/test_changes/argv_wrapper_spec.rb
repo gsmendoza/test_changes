@@ -4,8 +4,11 @@ require 'test_changes/argv_wrapper'
 
 describe TestChanges::ARGVWrapper do
   let(:default_commit) { 'HEAD' }
+  let(:default_test_tool_command) { 'rspec' }
 
-  subject(:wrapper) { described_class.new(argv) }
+  subject(:wrapper) do
+    described_class.new(argv, default_test_tool_command)
+  end
 
   describe "#commit" do
     context "where there are no arguments" do
@@ -54,6 +57,29 @@ describe TestChanges::ARGVWrapper do
     context "where --quiet option is given" do
       let(:argv) { ['--quiet'] }
       it { expect(wrapper.verbose?).to eq(false) }
+    end
+  end
+
+  describe '#test_tool_command' do
+    context "if not provided" do
+      let(:argv) { [] }
+
+      it "should be the default test tool command" do
+        expect(wrapper.test_tool_command).to eq(default_test_tool_command)
+      end
+    end
+
+    context "if provided" do
+      let(:test_tool_command) { 'rubocop' }
+      let(:argv) { ['-r', test_tool_command] }
+
+      before do
+        expect(test_tool_command).to_not eq(default_test_tool_command)
+      end
+
+      it "should be the provided test tool command" do
+        expect(wrapper.test_tool_command).to eq(test_tool_command)
+      end
     end
   end
 end

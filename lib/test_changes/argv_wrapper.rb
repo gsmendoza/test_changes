@@ -3,8 +3,11 @@ require 'test_changes'
 
 module TestChanges
   class ARGVWrapper
-    def initialize(argv)
+    attr_reader :argv, :default_test_tool_command
+
+    def initialize(argv, default_test_tool_command)
       @argv = argv
+      @default_test_tool_command = default_test_tool_command
     end
 
     def commit
@@ -21,18 +24,26 @@ module TestChanges
       end
     end
 
+    def test_tool_command
+      slop_options[:runner] || default_test_tool_command
+    end
+
     def verbose?
       !slop_options.quiet?
     end
 
     private
 
-    attr_reader :argv
-
     def slop_options
+      wrapper = self
+
       Slop.parse(argv, help: true, strict: true, banner: banner) do
         on 'c', 'commit=', 'Git commit', default: 'HEAD'
         on 'q', 'quiet', 'Do not print output', default: false
+
+        on 'r', 'runner=',
+          'The test tool to run. Default: the first runner of the config file.',
+          default: wrapper.default_test_tool_command
       end
     end
 
