@@ -21,25 +21,25 @@ module TestChanges
     private
 
     def self.use_rspec_rails(bin)
-      InferredConfig.new(
-        runner_name: bin,
+      runner = Runner.new(
+        name: bin,
         project_type_name: 'rspec_rails',
-        finding_patterns_map: {
+        finding_patterns: FindingPattern.build(
           '^app/(models)/(.+).rb' => 'spec/\1/\2_spec.rb',
-          '^app/(controller|helper|view)s/(.+).rb' => 'spec/controllers/\2_\1_spec.rb'
-        }
-      )
+          '^app/(controller|helper|view)s/(.+).rb' => 'spec/controllers/\2_\1_spec.rb'))
+
+      InferredConfig.new([runner])
     end
 
     def self.use_testunit_rails(bin)
-      InferredConfig.new(
-        runner_name: bin,
+      runner = Runner.new(
+        name: bin,
         project_type_name: 'testunit_rails',
-        finding_patterns_map: {
+        finding_patterns: FindingPattern.build(
           '^app/(models)/(.+).rb' => 'test/\1/\2_test.rb',
-          '^app/(controller|helper|view)s/(.+).rb' => 'test/controllers/\2_\1_test.rb'
-        }
-      )
+          '^app/(controller|helper|view)s/(.+).rb' => 'test/controllers/\2_\1_test.rb'))
+
+      InferredConfig.new([runner])
     end
   end
 end

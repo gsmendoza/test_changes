@@ -22,7 +22,7 @@ describe TestChanges::ConfigSetupService do
       end
 
       it 'sets finding patterns' do
-        expect(config.finding_patterns_map).to be_a Hash
+        expect(config.finding_patterns).to be_an Array
       end
     end
 
