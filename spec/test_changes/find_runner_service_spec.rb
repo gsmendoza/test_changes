@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-require 'test_changes/runner'
+require 'test_changes/find_runner_service'
 
-describe TestChanges::Runner do
+describe TestChanges::FindRunnerService do
   let(:default_runner_name) { 'rspec' }
 
   let(:finding_patterns) { [double(:finding_pattern)] }
@@ -22,7 +22,9 @@ describe TestChanges::Runner do
       test_tool_call_options: call_options)
   end
 
-  subject(:runner) { described_class.new(argv_wrapper) }
+  subject(:service) { described_class.new(argv_wrapper) }
+
+  let(:runner) { service.call }
 
   before do
     allow(TestChanges::ConfigSetupService)
