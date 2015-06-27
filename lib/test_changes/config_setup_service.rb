@@ -1,9 +1,11 @@
+require 'test_changes/config'
 require 'test_changes/inferred_config'
 
 module TestChanges
   module ConfigSetupService
     def self.call
-      config = Config.new('.test_changes.yaml')
+      config_file_name = '.test-changes.yml'
+      config = Config.new(config_file_name)
 
       return config if config.exists?
 
@@ -13,7 +15,7 @@ module TestChanges
         return use_testunit_rails('bundle exec ruby -Itest') if File.directory?('./test')
       end
 
-      fail TestChanges::Error, "No .test_changes.yaml found"
+      fail TestChanges::Error, "No #{config_file_name} found"
     end
 
     private

@@ -26,7 +26,7 @@ Or install it yourself as:
 
 ## Configuration
 
-Add a `.test_changes.yaml` configuration file to your repo. Example:
+Add a `.test-changes.yml` configuration file to your repo. Example:
 
 ```yaml
 ---
@@ -59,7 +59,7 @@ The options
 
 ## Usage
 
-`test_changes [test_tool_arguments] [commit]`
+`test-changes [test_tool_arguments] [commit]`
 
 * `test_tool_arguments` - Arguments that can be passed to the test tool.
 
@@ -68,9 +68,9 @@ The options
 Examples:
 
 ```
-test_changes
-test_changes master
-test_changes --format=documentation HEAD^
+test-changes
+test-changes master
+test-changes --format=documentation HEAD^
 ```
 
 ## Known to work on
