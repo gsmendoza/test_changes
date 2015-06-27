@@ -9,8 +9,13 @@ describe TestChanges::Runner do
     double(:config, test_tool_command: default_runner_name)
   end
 
+  let(:call_options) { ['--format=documentation'] }
+  let(:provided_runner_name) { nil }
+
   let(:argv_wrapper) do
-    double(:argv_wrapper, test_tool_command: provided_runner_name)
+    double(:argv_wrapper,
+      test_tool_command: provided_runner_name,
+      test_tool_call_options: call_options)
   end
 
   subject(:runner) { described_class.new(config, argv_wrapper) }
@@ -34,6 +39,12 @@ describe TestChanges::Runner do
       it "is the runner from the config matching the one provided" do
         expect(runner.name).to eq(provided_runner_name)
       end
+    end
+  end
+
+  describe "#call_options" do
+    it "are delegated from the argv_wrapper" do
+      expect(runner.call_options).to eq(call_options)
     end
   end
 end

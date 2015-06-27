@@ -9,6 +9,10 @@ module TestChanges
       argv_wrapper.test_tool_command || config.test_tool_command
     end
 
+    def call_options
+      argv_wrapper.test_tool_call_options
+    end
+
     private
 
     attr_reader :config, :argv_wrapper
