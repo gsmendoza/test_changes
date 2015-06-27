@@ -48,7 +48,7 @@ module TestChanges
     end
 
     def banner
-      "#{SUMMARY}: #{DESCRIPTION}"
+      "Usage: test-changes [options] -- [test tool arguments]"
     end
   end
 end
