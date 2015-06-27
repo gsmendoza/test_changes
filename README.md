@@ -30,24 +30,22 @@ Add a `.test-changes.yml` configuration file to your repo. Example:
 
 ```yaml
 ---
-test_tool_command: rspec
-
-finding_patterns:
+rspec:
   ^lib/(.+)\.rb: spec/\1_spec.rb
   ^spec/(.+)_spec.rb: spec/\1_spec.rb
 ```
 
 The options
 
-* `test_tool_command` - The command for running the tests.
+* The root key - The command for running the tests.
   Example: `rspec`, `zeus rspec`.
 
-* `finding_patterns` - If the name of a changed file matches the regular expression,
-  `test_changes` will test the file's matching tests. Can accept an array
-  of tests:
+* The root value - The finding patterns. If the name of a changed file matches
+  the regular expression, `test_changes` will test the file's matching tests.
+  Can accept an array of tests:
 
     ```yaml
-    finding_patterns:
+    rspec:
       ^lib/test_changes\.rb:
       - spec/test_changes_spec.rb
       - spec/test_changes/client_spec.rb

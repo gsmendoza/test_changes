@@ -12,13 +12,10 @@ describe TestChanges::Config do
   let(:substitution_pattern) { 'spec/\1_spec.rb' }
 
   let(:config_contents) do
-    {
-      'test_tool_command' => test_tool_command,
-      'finding_patterns' => finding_patterns_hash
-    }
+    { test_tool_command => finding_patterns_hash }
   end
 
-  let(:config_path) { 'tmp/test_changes.yaml' }
+  let(:config_path) { 'tmp/test-changes.yml' }
 
   subject(:config) { described_class.new(config_path) }
 
