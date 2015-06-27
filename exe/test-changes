@@ -2,16 +2,17 @@
 
 require 'test_changes/argv_wrapper'
 require 'test_changes/client'
+require 'test_changes/runner'
 require 'test_changes/config'
 require 'test_changes/inferred_config'
 require 'test_changes/config_setup_service'
 
 config = TestChanges::ConfigSetupService.call
-
-argv_wrapper = TestChanges::ARGVWrapper.new(ARGV, config.test_tool_command)
+argv_wrapper = TestChanges::ARGVWrapper.new(ARGV)
+runner = TestChanges::Runner.new(config, argv_wrapper)
 
 client = TestChanges::Client.new(
-  test_tool_command: argv_wrapper.test_tool_command,
+  test_tool_command: runner.name,
   finding_patterns: config.finding_patterns,
   commit: argv_wrapper.commit,
   test_tool_call_options: argv_wrapper.test_tool_call_options,

@@ -4,10 +4,9 @@ require 'test_changes/argv_wrapper'
 
 describe TestChanges::ARGVWrapper do
   let(:default_commit) { 'HEAD' }
-  let(:default_test_tool_command) { 'rspec' }
 
   subject(:wrapper) do
-    described_class.new(argv, default_test_tool_command)
+    described_class.new(argv)
   end
 
   describe "#commit" do
@@ -64,18 +63,12 @@ describe TestChanges::ARGVWrapper do
     context "if not provided" do
       let(:argv) { [] }
 
-      it "should be the default test tool command" do
-        expect(wrapper.test_tool_command).to eq(default_test_tool_command)
-      end
+      it { expect(wrapper.test_tool_command).to be_nil }
     end
 
     context "if provided" do
       let(:test_tool_command) { 'rubocop' }
       let(:argv) { ['-r', test_tool_command] }
-
-      before do
-        expect(test_tool_command).to_not eq(default_test_tool_command)
-      end
 
       it "should be the provided test tool command" do
         expect(wrapper.test_tool_command).to eq(test_tool_command)
