@@ -17,7 +17,7 @@ describe TestChanges::ARGVWrapper do
     end
 
     context "where there are arguments" do
-      let(:argv) { [commit] }
+      let(:argv) { ['-c', commit] }
       let(:commit) { 'HEAD^' }
 
       it "is the last argument" do
@@ -30,22 +30,14 @@ describe TestChanges::ARGVWrapper do
     subject(:test_tool_call_options) { wrapper.test_tool_call_options }
 
     context "where there are no arguments" do
-      let(:argv) { [] }
+      let(:argv) { [''] }
 
       it { expect(test_tool_call_options).to eq([]) }
     end
 
-    context "where there is one argument" do
-      let(:commit) { 'HEAD^' }
-      let(:argv) { [commit] }
-
-      it { expect(test_tool_call_options).to eq([]) }
-    end
-
-    context "where there are multiple argument" do
+    context "where there are arguments after --" do
       let(:option) { '--format=progress' }
-      let(:commit) { 'HEAD^' }
-      let(:argv) { [option, commit] }
+      let(:argv) { ['--', option] }
 
       it "is the first to the second to the last option" do
         expect(test_tool_call_options).to eq([option])

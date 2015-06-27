@@ -59,18 +59,20 @@ The options
 
 ## Usage
 
-`test-changes [test_tool_arguments] [commit]`
+`test-changes -c [commit] -- [test_tool_arguments]`
 
 * `test_tool_arguments` - Arguments that can be passed to the test tool.
 
 * `commit` - Test change from this commit. Defaults to HEAD.
 
+See `test-changes -h` for more options.
+
 Examples:
 
 ```
 test-changes
-test-changes master
-test-changes --format=documentation HEAD^
+test-changes -c master
+test-changes -c HEAD^ -- --format=documentation
 ```
 
 ## Known to work on
