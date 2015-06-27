@@ -17,7 +17,7 @@ describe TestChanges::Client do
         )
       ],
       commit: commit,
-      test_tool_call_options: test_tool_call_options,
+      runner_call_options: runner_call_options,
       verbose: false
     )
   end
@@ -38,7 +38,7 @@ describe TestChanges::Client do
     end
 
     context "where the commit is the only argument" do
-      let(:test_tool_call_options) { [] }
+      let(:runner_call_options) { [] }
 
       let(:commit) { 'HEAD^' }
       let(:expected_commit) { commit }
@@ -58,7 +58,7 @@ describe TestChanges::Client do
 
     context "where the arguments are the test tool options and the commit" do
       let(:option) { '--format=documentation' }
-      let(:test_tool_call_options) { [option] }
+      let(:runner_call_options) { [option] }
 
       let(:commit) { 'HEAD^' }
       let(:expected_commit) { commit }

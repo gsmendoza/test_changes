@@ -24,7 +24,7 @@ module TestChanges
     end
 
     def call_options
-      argv_wrapper.test_tool_call_options
+      argv_wrapper.runner_call_options
     end
 
     def finding_patterns

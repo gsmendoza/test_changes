@@ -13,11 +13,11 @@ module TestChanges
       slop_options[:commit]
     end
 
-    def test_tool_call_options
-      test_tool_call_options_delimiter_index = argv.index('--')
+    def runner_call_options
+      runner_call_options_delimiter_index = argv.index('--')
 
-      if test_tool_call_options_delimiter_index
-        argv.slice(test_tool_call_options_delimiter_index + 1, argv.size)
+      if runner_call_options_delimiter_index
+        argv.slice(runner_call_options_delimiter_index + 1, argv.size)
       else
         []
       end

@@ -28,13 +28,13 @@ describe TestChanges::ARGVWrapper do
     end
   end
 
-  describe "#test_tool_call_options" do
-    subject(:test_tool_call_options) { wrapper.test_tool_call_options }
+  describe "#runner_call_options" do
+    subject(:runner_call_options) { wrapper.runner_call_options }
 
     context "where there are no arguments" do
       let(:argv) { [''] }
 
-      it { expect(test_tool_call_options).to eq([]) }
+      it { expect(runner_call_options).to eq([]) }
     end
 
     context "where there are arguments after --" do
@@ -42,7 +42,7 @@ describe TestChanges::ARGVWrapper do
       let(:argv) { ['--', option] }
 
       it "is the first to the second to the last option" do
-        expect(test_tool_call_options).to eq([option])
+        expect(runner_call_options).to eq([option])
       end
     end
   end

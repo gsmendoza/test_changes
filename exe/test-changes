@@ -11,7 +11,7 @@ client = TestChanges::Client.new(
   runner_name: runner.name,
   finding_patterns: runner.finding_patterns,
   commit: argv_wrapper.commit,
-  test_tool_call_options: runner.call_options,
+  runner_call_options: runner.call_options,
   verbose: argv_wrapper.verbose?)
 
 client.call
