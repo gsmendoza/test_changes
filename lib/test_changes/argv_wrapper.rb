@@ -25,7 +25,7 @@ module TestChanges
     end
 
     def test_tool_command
-      slop_options[:runner] || default_test_tool_command
+      slop_options[:runner]
     end
 
     def verbose?
@@ -38,8 +38,8 @@ module TestChanges
       wrapper = self
 
       Slop.parse(argv, help: true, strict: true, banner: banner) do
-        on 'c', 'commit=', 'Git commit', default: 'HEAD'
-        on 'q', 'quiet', 'Do not print output', default: false
+        on 'c', 'commit=', 'Git commit. Default: HEAD.', default: 'HEAD'
+        on 'q', 'quiet', 'Do not print output. Default: false.', default: false
 
         on 'r', 'runner=',
           'The test tool to run. Default: the first runner of the config file.',
