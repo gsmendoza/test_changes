@@ -14,15 +14,20 @@ describe TestChanges::ConfigSetupService do
       Dir.chdir(fixture_path(project_type)) { described_class.call }
     end
 
+    let(:runner) do
+      expect(config.runners.size).to eq(1)
+      config.runners.first
+    end
+
     context 'rspec-rails' do
       let(:project_type) { 'rspec-rails' }
 
       it 'sets the test tool command' do
-        expect(config.test_tool_command).to eql './bin/rspec'
+        expect(runner.name).to eql './bin/rspec'
       end
 
       it 'sets finding patterns' do
-        expect(config.finding_patterns_map).to be_a Hash
+        expect(runner.finding_patterns).to be_an Array
       end
     end
 

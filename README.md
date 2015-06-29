@@ -26,51 +26,49 @@ Or install it yourself as:
 
 ## Configuration
 
-Add a `.test_changes.yaml` configuration file to your repo. Example:
+Add a `.test-changes.yml` configuration file to your repo. Example:
 
 ```yaml
 ---
-test_tool_command: rspec
-
-finding_patterns:
+rspec:
   ^lib/(.+)\.rb: spec/\1_spec.rb
   ^spec/(.+)_spec.rb: spec/\1_spec.rb
-
-verbose: true
+rubocop:
+  ^(.+)\.rb: \1.rb
 ```
 
 The options
 
-* `test_tool_command` - The command for running the tests.
-  Example: `rspec`, `zeus rspec`.
+* The keys - The commands for running the tests.
+  Example: `rspec`, `zeus rspec`, `rubocop`.
 
-* `finding_patterns` - If the name of a changed file matches the regular expression,
-  `test_changes` will test the file's matching tests. Can accept an array
-  of tests:
+* The values - The finding patterns. If the name of a changed file matches
+  the regular expression, `test_changes` will test the file's matching tests.
+  Can accept an array of tests:
 
     ```yaml
-    finding_patterns:
+    rspec:
       ^lib/test_changes\.rb:
       - spec/test_changes_spec.rb
       - spec/test_changes/client_spec.rb
     ```
 
-* `verbose` - Set the verbose level of output.
-
 ## Usage
 
-`test_changes [test_tool_arguments] [commit]`
+`test-changes -c [commit] -- [test_tool_arguments]`
 
 * `test_tool_arguments` - Arguments that can be passed to the test tool.
 
 * `commit` - Test change from this commit. Defaults to HEAD.
 
+See `test-changes -h` for more options.
+
 Examples:
 
 ```
-test_changes
-test_changes master
-test_changes --format=documentation HEAD^
+test-changes
+test-changes -c master
+test-changes -c HEAD^ -- --format=documentation
 ```
 
 ## Known to work on

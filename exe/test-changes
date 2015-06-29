@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+
+require 'test_changes/argv_wrapper'
+require 'test_changes/client'
+require 'test_changes/find_runner_service'
+
+argv_wrapper = TestChanges::ARGVWrapper.new(ARGV)
+runner = TestChanges::FindRunnerService.new(argv_wrapper).call
+
+client = TestChanges::Client.new(
+  runner_name: runner.name,
+  finding_patterns: runner.finding_patterns,
+  commit: argv_wrapper.commit,
+  runner_call_options: argv_wrapper.runner_call_options,
+  verbose: argv_wrapper.verbose?)
+
+client.call

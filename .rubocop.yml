@@ -12,3 +12,7 @@ StringLiterals:
 
 Style/AlignParameters:
   Enabled: false
+
+Style/FileName:
+  Exclude:
+  - exe/*

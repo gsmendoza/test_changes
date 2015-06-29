@@ -1,7 +1,5 @@
----
-test_tool_command: rspec
-finding_patterns:
+rspec:
   ^lib/(.+)\.rb: spec/\1_spec.rb
   ^spec/(.+)_spec.rb: spec/\1_spec.rb
-
-verbose: true
+rubocop:
+  ^(.+)\.rb: \1.rb

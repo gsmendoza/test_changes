@@ -5,7 +5,9 @@ require 'test_changes/argv_wrapper'
 describe TestChanges::ARGVWrapper do
   let(:default_commit) { 'HEAD' }
 
-  subject(:wrapper) { described_class.new(argv) }
+  subject(:wrapper) do
+    described_class.new(argv)
+  end
 
   describe "#commit" do
     context "where there are no arguments" do
@@ -17,7 +19,7 @@ describe TestChanges::ARGVWrapper do
     end
 
     context "where there are arguments" do
-      let(:argv) { [commit] }
+      let(:argv) { ['-c', commit] }
       let(:commit) { 'HEAD^' }
 
       it "is the last argument" do
@@ -26,29 +28,50 @@ describe TestChanges::ARGVWrapper do
     end
   end
 
-  describe "#test_tool_call_options" do
-    subject(:test_tool_call_options) { wrapper.test_tool_call_options }
+  describe "#runner_call_options" do
+    subject(:runner_call_options) { wrapper.runner_call_options }
 
     context "where there are no arguments" do
-      let(:argv) { [] }
+      let(:argv) { [''] }
 
-      it { expect(test_tool_call_options).to eq([]) }
+      it { expect(runner_call_options).to eq([]) }
     end
 
-    context "where there is one argument" do
-      let(:commit) { 'HEAD^' }
-      let(:argv) { [commit] }
-
-      it { expect(test_tool_call_options).to eq([]) }
-    end
-
-    context "where there are multiple argument" do
+    context "where there are arguments after --" do
       let(:option) { '--format=progress' }
-      let(:commit) { 'HEAD^' }
-      let(:argv) { [option, commit] }
+      let(:argv) { ['--', option] }
 
       it "is the first to the second to the last option" do
-        expect(test_tool_call_options).to eq([option])
+        expect(runner_call_options).to eq([option])
+      end
+    end
+  end
+
+  describe "#verbose" do
+    context "by default" do
+      let(:argv) { [] }
+      it { expect(wrapper.verbose?).to eq(true) }
+    end
+
+    context "where --quiet option is given" do
+      let(:argv) { ['--quiet'] }
+      it { expect(wrapper.verbose?).to eq(false) }
+    end
+  end
+
+  describe '#runner_name' do
+    context "if not provided" do
+      let(:argv) { [] }
+
+      it { expect(wrapper.runner_name).to be_nil }
+    end
+
+    context "if provided" do
+      let(:runner_name) { 'rubocop' }
+      let(:argv) { ['-r', runner_name] }
+
+      it "should be the provided test tool command" do
+        expect(wrapper.runner_name).to eq(runner_name)
       end
     end
   end

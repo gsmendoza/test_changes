@@ -3,10 +3,10 @@ require 'test_changes/finding_pattern'
 module TestChanges
   class Client
     def initialize(options)
-      @test_tool_command = options[:test_tool_command]
+      @runner_name = options[:runner_name]
       @finding_patterns = options[:finding_patterns]
       @commit = options[:commit]
-      @test_tool_call_options = options[:test_tool_call_options]
+      @runner_call_options = options[:runner_call_options]
       @verbose = options[:verbose]
     end
 
@@ -30,8 +30,8 @@ module TestChanges
 
     attr_reader :commit,
       :finding_patterns,
-      :test_tool_command,
-      :test_tool_call_options,
+      :runner_name,
+      :runner_call_options,
       :verbose
 
     def log(header, message)
@@ -52,8 +52,8 @@ module TestChanges
 
     def test_tool_call
       @test_tool_call ||= [
-        test_tool_command,
-        test_tool_call_options,
+        runner_name,
+        runner_call_options,
         existing_matches
       ].flatten.compact.join(' ')
     end

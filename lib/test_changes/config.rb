@@ -11,16 +11,12 @@ module TestChanges
       File.exist?(@config_path)
     end
 
-    def finding_patterns
-      FindingPattern.build config['finding_patterns']
-    end
-
-    def test_tool_command
-      config['test_tool_command']
-    end
-
-    def verbose
-      config['verbose']
+    def runners
+      config.map do |runner_name, finding_pattern_maps|
+        Runner.new(
+          name: runner_name,
+          finding_patterns: FindingPattern.build(finding_pattern_maps))
+      end
     end
 
     private

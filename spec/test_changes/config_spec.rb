@@ -5,41 +5,42 @@ require 'spec_helper'
 require 'test_changes/config'
 
 describe TestChanges::Config do
-  let(:test_tool_command) { 'rspec' }
+  let(:runner_name) { 'rspec' }
 
   let(:pattern_as_string) { '^lib/(.+)\.rb' }
   let(:pattern_as_regular_expression) { %r{^lib/(.+)\.rb} }
   let(:substitution_pattern) { 'spec/\1_spec.rb' }
 
   let(:config_contents) do
-    {
-      'test_tool_command' => test_tool_command,
-      'finding_patterns' => finding_patterns_hash
-    }
+    { runner_name => finding_patterns_hash }
   end
 
-  let(:config_path) { 'tmp/test_changes.yaml' }
+  let(:config_path) { 'tmp/test-changes.yml' }
 
   subject(:config) { described_class.new(config_path) }
+
+  let(:runner) do
+    expect(config.runners.size).to eq(1)
+    config.runners.first
+  end
 
   before do
     FileUtils.mkdir_p 'tmp'
     File.write(config_path, YAML.dump(config_contents))
   end
 
-  describe '#test_tool_command' do
+  describe '#runners' do
     let(:finding_patterns_hash) { {} }
 
-    it "is the test_tool_command from the yaml file" do
-      expect(config.test_tool_command).to eq(test_tool_command)
+    it "are the runners from the yaml file" do
+      expect(runner.name).to eq(runner_name)
     end
   end
 
   describe '#finding_patterns' do
     shared_examples "builds finding_patterns from the config" do
       it "builds finding_patterns from the config" do
-        expect(config.finding_patterns.size).to eq(1)
-        finding_pattern = config.finding_patterns.first
+        finding_pattern = runner.finding_patterns.first
 
         expect(finding_pattern).to be_a(TestChanges::FindingPattern)
 
@@ -58,7 +59,7 @@ describe TestChanges::Config do
       include_examples "builds finding_patterns from the config"
     end
 
-    context "where the substitution_patterns is a single pattern", :focus do
+    context "where the substitution_patterns is a single pattern" do
       let(:substitution_patterns) { substitution_pattern }
 
       include_examples "builds finding_patterns from the config"

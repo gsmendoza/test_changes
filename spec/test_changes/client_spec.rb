@@ -5,7 +5,7 @@ require 'test_changes/client'
 describe TestChanges::Client do
   subject(:client) do
     described_class.new(
-      test_tool_command: 'rspec',
+      runner_name: 'rspec',
       finding_patterns: [
         TestChanges::FindingPattern.new(
           matching_pattern: %r{^lib/(.+)\.rb},
@@ -17,7 +17,7 @@ describe TestChanges::Client do
         )
       ],
       commit: commit,
-      test_tool_call_options: test_tool_call_options,
+      runner_call_options: runner_call_options,
       verbose: false
     )
   end
@@ -29,16 +29,16 @@ describe TestChanges::Client do
 
     let(:changed_file_path) { 'lib/test_changes/client.rb' }
 
-    let(:test_tool_command) { 'rspec' }
+    let(:runner_name) { 'rspec' }
 
     let(:matching_file_path) { 'spec/test_changes/client_spec.rb' }
 
     let(:test_tool_call) do
-      "#{test_tool_command} #{matching_file_path}"
+      "#{runner_name} #{matching_file_path}"
     end
 
     context "where the commit is the only argument" do
-      let(:test_tool_call_options) { [] }
+      let(:runner_call_options) { [] }
 
       let(:commit) { 'HEAD^' }
       let(:expected_commit) { commit }
@@ -58,13 +58,13 @@ describe TestChanges::Client do
 
     context "where the arguments are the test tool options and the commit" do
       let(:option) { '--format=documentation' }
-      let(:test_tool_call_options) { [option] }
+      let(:runner_call_options) { [option] }
 
       let(:commit) { 'HEAD^' }
       let(:expected_commit) { commit }
 
       let(:test_tool_call) do
-        "#{test_tool_command} #{option} #{matching_file_path}"
+        "#{runner_name} #{option} #{matching_file_path}"
       end
 
       it "runs the test tool on tests matching files changed since that commit" do
