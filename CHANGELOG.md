@@ -1,5 +1,7 @@
 ## master
 
+## 0.2.0
+
 ### Breaking changes
 
 * Command line API changed. See README and `test-changes -h` for more information. #4
