@@ -45,7 +45,7 @@ At the root of the file, we have the commands for running the tests. Examples: `
 
 These are the options under each command:
 
-* finding_patterns - If the name of a changed file matches
+* `finding_patterns` - If the name of a changed file matches
   the regular expression, `test_changes` will test the file's matching tests.
   Can accept an array of tests:
 
@@ -57,9 +57,9 @@ These are the options under each command:
         - spec/test_changes/*_spec.rb
     ```
 
-  The values can also be glob patterns.
+    The values can also be glob patterns.
 
-* exclude - Patterns of files that should be excluded from the run.
+* `exclude` - Patterns of files that should be excluded from the run.
 
 ## Usage
 
@@ -76,7 +76,7 @@ Examples:
 ```
 test-changes
 test-changes -c master
-test-changes -c HEAD^ -- --format=documentation
+test-changes -r rspec -c HEAD^ -- --format=documentation
 ```
 
 ## Known to work on
@@ -86,7 +86,7 @@ test-changes -c HEAD^ -- --format=documentation
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `bin/console` for an interactive prompt that will allow you to experiment.
+After checking out the repo, run `bundle install` to install dependencies. Then, run `bundle console` for an interactive prompt that will allow you to experiment.
 
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release` to create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
