@@ -8,11 +8,14 @@ module TestChanges
     end
 
     def matching_paths(path)
-      results = substitution_patterns.map do |substitution_pattern|
-        path.sub(matching_pattern, substitution_pattern) if matches?(path)
+      results = substitution_patterns.flat_map do |substitution_pattern|
+        if matches?(path)
+          substituted_pattern = path.sub(matching_pattern, substitution_pattern)
+          Pathname.glob(substituted_pattern)
+        end
       end
 
-      results.compact
+      results.compact.map(&:to_s)
     end
 
     def self.build(patterns)

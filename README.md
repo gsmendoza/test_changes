@@ -50,8 +50,10 @@ The options
     rspec:
       ^lib/test_changes\.rb:
       - spec/test_changes_spec.rb
-      - spec/test_changes/client_spec.rb
+      - spec/test_changes/*_spec.rb
     ```
+
+  The values can also be glob patterns.
 
 ## Usage
 
