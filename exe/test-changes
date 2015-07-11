@@ -2,12 +2,17 @@
 
 require 'test_changes/argv_wrapper'
 require 'test_changes/client'
+require 'test_changes/config_setup_service'
 require 'test_changes/find_runner_service'
 
 argv_wrapper = TestChanges::ARGVWrapper.new(ARGV)
+config = TestChanges::ConfigSetupService.call
+
+find_runner_service =
+  TestChanges::FindRunnerService.new(argv_wrapper: argv_wrapper, config: config)
 
 client = TestChanges::Client.new(
   argv_wrapper: argv_wrapper,
-  runner: TestChanges::FindRunnerService.new(argv_wrapper: argv_wrapper).call)
+  runner: find_runner_service.call)
 
 client.call

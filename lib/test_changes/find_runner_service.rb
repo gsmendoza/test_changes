@@ -1,11 +1,10 @@
-require 'test_changes/config_setup_service'
 require 'test_changes/runner'
 
 module TestChanges
   class FindRunnerService
-    def initialize(argv_wrapper: nil)
-      @config = ConfigSetupService.call
+    def initialize(argv_wrapper: nil, config: nil)
       @argv_wrapper = argv_wrapper
+      @config = config
     end
 
     def call

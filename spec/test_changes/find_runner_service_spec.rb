@@ -29,15 +29,13 @@ describe TestChanges::FindRunnerService do
       runner_name: provided_runner_name)
   end
 
-  subject(:service) { described_class.new(argv_wrapper: argv_wrapper) }
+  subject(:service) do
+    described_class.new(
+      argv_wrapper: argv_wrapper,
+      config: config)
+  end
 
   let(:runner) { service.call }
-
-  before do
-    allow(TestChanges::ConfigSetupService)
-      .to receive(:call)
-      .and_return(config)
-  end
 
   describe "#call" do
     context "where the user did not provide a runner" do
