@@ -9,20 +9,20 @@ module TestChanges
 
     # rubocop:disable Metrics/AbcSize
     def call
-      log "paths_changed_since_commit #{argv_wrapper.commit}:",
+      log "Paths changed since commit #{argv_wrapper.commit}:",
         paths_changed_since_commit.inspect
 
-      log "matches:", matches.inspect
+      log "Matches:", matches.inspect
 
-      log "existing_matches:", existing_matches.inspect
+      log "Existing matches:", existing_matches.inspect
 
       return if existing_matches.empty?
 
-      log "included_matches:", included_matches.inspect
+      log "Non-excluded matches:", included_matches.inspect
 
       return if included_matches.empty?
 
-      log "test_tool_call:", test_tool_call
+      log "Test tool call:", test_tool_call
       system(test_tool_call)
     end
     # rubocop:enable Metrics/AbcSize
