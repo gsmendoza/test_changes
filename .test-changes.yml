@@ -1,9 +1,7 @@
 rspec:
-  ^lib/(.+)\.rb: spec/\1_spec.rb
-
-  ^spec/(.+)_spec.rb: spec/\1_spec.rb
-
-  ^README.md:
-  - spec/test_changes/*_spec.rb
+  finding_patterns:
+    ^lib/(.+)\.rb: spec/\1_spec.rb
+    ^spec/(.+)_spec.rb: spec/\1_spec.rb
 rubocop:
-  ^(.+)\.rb: \1.rb
+  finding_patterns:
+    ^(.+)\.rb: \1.rb

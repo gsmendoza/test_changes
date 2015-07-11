@@ -31,26 +31,28 @@ Add a `.test-changes.yml` configuration file to your repo. Example:
 ```yaml
 ---
 rspec:
-  ^lib/(.+)\.rb: spec/\1_spec.rb
-  ^spec/(.+)_spec.rb: spec/\1_spec.rb
+  finding_patterns:
+    ^lib/(.+)\.rb: spec/\1_spec.rb
+    ^spec/(.+)_spec.rb: spec/\1_spec.rb
 rubocop:
-  ^(.+)\.rb: \1.rb
+  finding_patterns:
+    ^(.+)\.rb: \1.rb
 ```
 
-The options
+At the root of the file, we have the commands for running the tests. Examples: `rspec`, `zeus rspec`, `rubocop`.
 
-* The keys - The commands for running the tests.
-  Example: `rspec`, `zeus rspec`, `rubocop`.
+These are the options under each command:
 
-* The values - The finding patterns. If the name of a changed file matches
+* finding_patterns - If the name of a changed file matches
   the regular expression, `test_changes` will test the file's matching tests.
   Can accept an array of tests:
 
     ```yaml
     rspec:
-      ^lib/test_changes\.rb:
-      - spec/test_changes_spec.rb
-      - spec/test_changes/*_spec.rb
+      finding_patterns:
+        ^lib/test_changes\.rb:
+        - spec/test_changes_spec.rb
+        - spec/test_changes/*_spec.rb
     ```
 
   The values can also be glob patterns.

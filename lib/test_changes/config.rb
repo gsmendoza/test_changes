@@ -1,4 +1,5 @@
 require 'test_changes/finding_pattern'
+require 'test_changes/runner'
 require 'yaml'
 
 module TestChanges
@@ -12,7 +13,9 @@ module TestChanges
     end
 
     def runners
-      config.map do |runner_name, finding_pattern_maps|
+      config.map do |runner_name, options|
+        finding_pattern_maps = options['finding_patterns']
+
         Runner.new(
           name: runner_name,
           finding_patterns: FindingPattern.build(finding_pattern_maps))

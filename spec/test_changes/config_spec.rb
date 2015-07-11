@@ -12,7 +12,11 @@ describe TestChanges::Config do
   let(:substitution_pattern) { 'spec/\1_spec.rb' }
 
   let(:config_contents) do
-    { runner_name => finding_patterns_hash }
+    {
+      runner_name => {
+        'finding_patterns' => finding_patterns_hash
+      }
+    }
   end
 
   let(:config_path) { 'tmp/test-changes.yml' }
