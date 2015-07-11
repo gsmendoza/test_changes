@@ -1,5 +1,7 @@
 ## master
 
+* Update slop to 4.2.
+
 ## 0.3.1
 
 ### Bug fixes

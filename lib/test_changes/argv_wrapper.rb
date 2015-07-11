@@ -30,15 +30,23 @@ module TestChanges
 
     private
 
+    # rubocop:disable Metrics/MethodLength
     def slop_options
-      Slop.parse(argv, help: true, strict: true, banner: banner) do
-        on 'c', 'commit=', 'Git commit. Default: HEAD.', default: 'HEAD'
-        on 'q', 'quiet', 'Do not print output. Default: false.', default: false
+      Slop.parse(argv) do |o|
+        o.banner = banner
+        o.string '-c', '--commit', 'Git commit. Default: HEAD.', default: 'HEAD'
+        o.boolean '-q', '--quiet', 'Do not print output. Default: false.', default: false
 
-        on 'r', 'runner=',
+        o.string '-r', '--runner',
           'The test tool to run. Default: the first runner of the config file.'
+
+        o.on '-h', '--help', 'Display this help message.' do
+          puts o
+          exit
+        end
       end
     end
+    # rubocop:enable Metrics/MethodLength
 
     def banner
       "Usage: test-changes [options] -- [test tool arguments]"
