@@ -3,6 +3,13 @@ require 'spec_helper'
 require 'test_changes/client'
 
 describe TestChanges::Client do
+  let(:argv_wrapper) do
+    double(:argv_wrapper,
+      commit: commit,
+      runner_call_options: runner_call_options,
+      verbose?: false)
+  end
+
   let(:ignore_excluded_files_service) do
     double(:ignore_excluded_files_service)
   end
@@ -31,10 +38,8 @@ describe TestChanges::Client do
 
   subject(:client) do
     described_class.new(
-      runner: runner,
-      commit: commit,
-      runner_call_options: runner_call_options,
-      verbose: false
+      argv_wrapper: argv_wrapper,
+      runner: runner
     )
   end
 

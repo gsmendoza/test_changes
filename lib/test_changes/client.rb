@@ -3,15 +3,13 @@ require 'test_changes/finding_pattern'
 module TestChanges
   class Client
     def initialize(options)
+      @argv_wrapper = options[:argv_wrapper]
       @runner = options[:runner]
-      @commit = options[:commit]
-      @runner_call_options = options[:runner_call_options]
-      @verbose = options[:verbose]
     end
 
     # rubocop:disable Metrics/AbcSize
     def call
-      log "paths_changed_since_commit #{commit}:",
+      log "paths_changed_since_commit #{argv_wrapper.commit}:",
         paths_changed_since_commit.inspect
 
       log "matches:", matches.inspect
@@ -31,13 +29,10 @@ module TestChanges
 
     private
 
-    attr_reader :commit,
-      :runner,
-      :runner_call_options,
-      :verbose
+    attr_reader :argv_wrapper, :runner
 
     def log(header, message)
-      return unless verbose?
+      return unless argv_wrapper.verbose?
 
       puts "\n#{header}"
       puts message
@@ -49,13 +44,13 @@ module TestChanges
 
     def paths_changed_since_commit
       @paths_changed_since_commit ||=
-        `git diff --name-only --diff-filter=AMR #{commit}`.split("\n")
+        `git diff --name-only --diff-filter=AMR #{argv_wrapper.commit}`.split("\n")
     end
 
     def test_tool_call
       @test_tool_call ||= [
         runner.name,
-        runner_call_options,
+        argv_wrapper.runner_call_options,
         included_matches
       ].flatten.compact.join(' ')
     end

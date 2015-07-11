@@ -7,9 +7,7 @@ require 'test_changes/find_runner_service'
 argv_wrapper = TestChanges::ARGVWrapper.new(ARGV)
 
 client = TestChanges::Client.new(
-  runner: TestChanges::FindRunnerService.new(argv_wrapper).call,
-  commit: argv_wrapper.commit,
-  runner_call_options: argv_wrapper.runner_call_options,
-  verbose: argv_wrapper.verbose?)
+  argv_wrapper: argv_wrapper,
+  runner: TestChanges::FindRunnerService.new(argv_wrapper).call)
 
 client.call
