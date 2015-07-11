@@ -29,7 +29,7 @@ describe TestChanges::FindRunnerService do
       runner_name: provided_runner_name)
   end
 
-  subject(:service) { described_class.new(argv_wrapper) }
+  subject(:service) { described_class.new(argv_wrapper: argv_wrapper) }
 
   let(:runner) { service.call }
 

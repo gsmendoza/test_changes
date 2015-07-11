@@ -3,7 +3,7 @@ require 'test_changes/runner'
 
 module TestChanges
   class FindRunnerService
-    def initialize(argv_wrapper)
+    def initialize(argv_wrapper: nil)
       @config = ConfigSetupService.call
       @argv_wrapper = argv_wrapper
     end

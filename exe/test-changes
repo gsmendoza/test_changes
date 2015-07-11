@@ -8,6 +8,6 @@ argv_wrapper = TestChanges::ARGVWrapper.new(ARGV)
 
 client = TestChanges::Client.new(
   argv_wrapper: argv_wrapper,
-  runner: TestChanges::FindRunnerService.new(argv_wrapper).call)
+  runner: TestChanges::FindRunnerService.new(argv_wrapper: argv_wrapper).call)
 
 client.call
