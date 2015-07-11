@@ -1,5 +1,16 @@
 ## master
 
+## 0.3.0
+
+### Breaking changes
+
+* Reintroduced finding_patterns option in config file. See README for more info.
+
+### New features
+
+* You can now list files that should be excluded when running a command.
+* You can now specify glob patterns as substitution patterns.
+
 ## 0.2.0
 
 ### Breaking changes
