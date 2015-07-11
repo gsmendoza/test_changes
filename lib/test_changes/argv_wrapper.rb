@@ -44,6 +44,11 @@ module TestChanges
           puts o
           exit
         end
+
+        o.on '-v', '--version', 'Display the version.' do
+          puts VERSION
+          exit
+        end
       end
     end
     # rubocop:enable Metrics/MethodLength
