@@ -1,5 +1,12 @@
 ## master
 
+## 0.3.1
+
+### Bug fixes
+
+* Fix: throws error if a runner doesn't have exclusion patterns.
+* Fix: FindingPattern should require pathname.
+
 ## 0.3.0
 
 ### Breaking changes
