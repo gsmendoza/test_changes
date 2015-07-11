@@ -5,12 +5,9 @@ require 'test_changes/client'
 require 'test_changes/find_runner_service'
 
 argv_wrapper = TestChanges::ARGVWrapper.new(ARGV)
-runner = TestChanges::FindRunnerService.new(argv_wrapper).call
 
 client = TestChanges::Client.new(
-  runner_name: runner.name,
-  finding_patterns: runner.finding_patterns,
-  ignore_excluded_files_service: runner.ignore_excluded_files_service,
+  runner: TestChanges::FindRunnerService.new(argv_wrapper).call,
   commit: argv_wrapper.commit,
   runner_call_options: argv_wrapper.runner_call_options,
   verbose: argv_wrapper.verbose?)

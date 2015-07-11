@@ -7,20 +7,31 @@ describe TestChanges::Client do
     double(:ignore_excluded_files_service)
   end
 
+  let(:finding_patterns) do
+    [
+      TestChanges::FindingPattern.new(
+        matching_pattern: %r{^lib/(.+)\.rb},
+        substitution_patterns: ['spec/\1_spec.rb']
+      ),
+      TestChanges::FindingPattern.new(
+        matching_pattern: %r{^spec/(.+)_spec.rb},
+        substitution_patterns: ['spec/\1_spec.rb']
+      )
+    ]
+  end
+
+  let(:runner_name) { 'rspec' }
+
+  let(:runner) do
+    double(:runner,
+      finding_patterns: finding_patterns,
+      ignore_excluded_files_service: ignore_excluded_files_service,
+      name: runner_name)
+  end
+
   subject(:client) do
     described_class.new(
-      ignore_excluded_files_service: ignore_excluded_files_service,
-      runner_name: 'rspec',
-      finding_patterns: [
-        TestChanges::FindingPattern.new(
-          matching_pattern: %r{^lib/(.+)\.rb},
-          substitution_patterns: ['spec/\1_spec.rb']
-        ),
-        TestChanges::FindingPattern.new(
-          matching_pattern: %r{^spec/(.+)_spec.rb},
-          substitution_patterns: ['spec/\1_spec.rb']
-        )
-      ],
+      runner: runner,
       commit: commit,
       runner_call_options: runner_call_options,
       verbose: false
