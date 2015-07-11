@@ -2,6 +2,8 @@ rspec:
   finding_patterns:
     ^lib/(.+)\.rb: spec/\1_spec.rb
     ^spec/(.+)_spec.rb: spec/\1_spec.rb
+  exclude:
+    - spec/fixtures/**/*
 rubocop:
   finding_patterns:
     ^(.+)\.rb: \1.rb

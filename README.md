@@ -34,6 +34,8 @@ rspec:
   finding_patterns:
     ^lib/(.+)\.rb: spec/\1_spec.rb
     ^spec/(.+)_spec.rb: spec/\1_spec.rb
+  exclude:
+    - spec/fixtures/**/*
 rubocop:
   finding_patterns:
     ^(.+)\.rb: \1.rb
@@ -56,6 +58,8 @@ These are the options under each command:
     ```
 
   The values can also be glob patterns.
+
+* exclude - Patterns of files that should be excluded from the run.
 
 ## Usage
 

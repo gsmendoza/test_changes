@@ -3,6 +3,7 @@ require 'test_changes/finding_pattern'
 module TestChanges
   class Client
     def initialize(options)
+      @ignore_excluded_files_service = options[:ignore_excluded_files_service]
       @runner_name = options[:runner_name]
       @finding_patterns = options[:finding_patterns]
       @commit = options[:commit]
@@ -21,6 +22,10 @@ module TestChanges
 
       return if existing_matches.empty?
 
+      log "included_matches:", included_matches.inspect
+
+      return if included_matches.empty?
+
       log "test_tool_call:", test_tool_call
       system(test_tool_call)
     end
@@ -30,6 +35,7 @@ module TestChanges
 
     attr_reader :commit,
       :finding_patterns,
+      :ignore_excluded_files_service,
       :runner_name,
       :runner_call_options,
       :verbose
@@ -54,8 +60,12 @@ module TestChanges
       @test_tool_call ||= [
         runner_name,
         runner_call_options,
-        existing_matches
+        included_matches
       ].flatten.compact.join(' ')
+    end
+
+    def included_matches
+      ignore_excluded_files_service.call(existing_matches)
     end
 
     def existing_matches

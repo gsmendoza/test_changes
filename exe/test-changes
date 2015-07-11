@@ -10,6 +10,7 @@ runner = TestChanges::FindRunnerService.new(argv_wrapper).call
 client = TestChanges::Client.new(
   runner_name: runner.name,
   finding_patterns: runner.finding_patterns,
+  ignore_excluded_files_service: runner.ignore_excluded_files_service,
   commit: argv_wrapper.commit,
   runner_call_options: argv_wrapper.runner_call_options,
   verbose: argv_wrapper.verbose?)

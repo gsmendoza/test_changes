@@ -18,7 +18,8 @@ module TestChanges
 
         Runner.new(
           name: runner_name,
-          finding_patterns: FindingPattern.build(finding_pattern_maps))
+          finding_patterns: FindingPattern.build(finding_pattern_maps),
+          exclusion_patterns: options['exclude'])
       end
     end
 

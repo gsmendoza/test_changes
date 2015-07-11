@@ -3,8 +3,13 @@ require 'spec_helper'
 require 'test_changes/client'
 
 describe TestChanges::Client do
+  let(:ignore_excluded_files_service) do
+    double(:ignore_excluded_files_service)
+  end
+
   subject(:client) do
     described_class.new(
+      ignore_excluded_files_service: ignore_excluded_files_service,
       runner_name: 'rspec',
       finding_patterns: [
         TestChanges::FindingPattern.new(
@@ -52,6 +57,12 @@ describe TestChanges::Client do
 
         expect(File).to receive(:exist?).with(matching_file_path).and_return(true)
 
+        expect(ignore_excluded_files_service)
+          .to receive(:call)
+          .with([matching_file_path])
+          .at_least(:once)
+          .and_return([matching_file_path])
+
         client.call
       end
     end
@@ -75,6 +86,12 @@ describe TestChanges::Client do
         expect(subject).to receive(:system).with(test_tool_call)
 
         expect(File).to receive(:exist?).with(matching_file_path).and_return(true)
+
+        expect(ignore_excluded_files_service)
+          .to receive(:call)
+          .with([matching_file_path])
+          .at_least(:once)
+          .and_return([matching_file_path])
 
         client.call
       end

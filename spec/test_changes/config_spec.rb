@@ -10,11 +10,19 @@ describe TestChanges::Config do
   let(:pattern_as_string) { '^lib/(.+)\.rb' }
   let(:pattern_as_regular_expression) { %r{^lib/(.+)\.rb} }
   let(:substitution_pattern) { 'spec/\1_spec.rb' }
+  let(:substitution_patterns) { [substitution_pattern] }
+
+  let(:finding_patterns_hash) do
+    { pattern_as_string => substitution_patterns }
+  end
+
+  let(:exclusion_pattern) { 'spec/fixtures/**/*' }
 
   let(:config_contents) do
     {
       runner_name => {
-        'finding_patterns' => finding_patterns_hash
+        'finding_patterns' => finding_patterns_hash,
+        'exclude' => [exclusion_pattern]
       }
     }
   end
@@ -36,8 +44,10 @@ describe TestChanges::Config do
   describe '#runners' do
     let(:finding_patterns_hash) { {} }
 
-    it "are the runners from the yaml file" do
+    it "are the runners from the yaml file", :focus do
       expect(runner.name).to eq(runner_name)
+      expect(runner.ignore_excluded_files_service.exclusion_patterns)
+        .to eq([exclusion_pattern])
     end
   end
 
