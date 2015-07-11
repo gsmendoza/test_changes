@@ -1,5 +1,7 @@
 ## master
 
+## 0.3.2
+
 * Update slop to 4.2.
 * Add version option.
 
