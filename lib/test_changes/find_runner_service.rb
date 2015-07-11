@@ -1,5 +1,3 @@
-require 'test_changes/runner'
-
 module TestChanges
   class FindRunnerService
     def initialize(argv_wrapper: nil, config: nil)

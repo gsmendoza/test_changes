@@ -1,7 +1,5 @@
 require 'spec_helper'
 
-require 'test_changes/argv_wrapper'
-
 describe TestChanges::ARGVWrapper do
   let(:default_commit) { 'HEAD' }
 

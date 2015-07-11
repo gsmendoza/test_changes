@@ -1,7 +1,5 @@
 require 'spec_helper'
 
-require 'test_changes/ignore_excluded_files_service'
-
 describe TestChanges::IgnoreExcludedFilesService do
   let(:matching_path) do
     'spec/fixtures/sample/spec/test_changes/version_spec.rb'

@@ -1,7 +1,3 @@
-require 'test_changes/finding_pattern'
-require 'test_changes/runner'
-require 'yaml'
-
 module TestChanges
   class Config
     def initialize(config_path)

@@ -1,7 +1,5 @@
 require 'spec_helper'
 
-require 'test_changes/client'
-
 describe TestChanges::Client do
   let(:argv_wrapper) do
     double(:argv_wrapper,

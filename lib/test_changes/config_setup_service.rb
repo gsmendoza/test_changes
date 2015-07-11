@@ -1,6 +1,3 @@
-require 'test_changes/config'
-require 'test_changes/inferred_config'
-
 module TestChanges
   module ConfigSetupService
     def self.call

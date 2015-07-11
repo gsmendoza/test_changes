@@ -1,5 +1,3 @@
-require 'test_changes/finding_pattern'
-
 module TestChanges
   class Client
     def initialize(options)

@@ -1,8 +1,4 @@
-require 'fileutils'
-require 'yaml'
 require 'spec_helper'
-
-require 'test_changes/config_setup_service'
 
 describe TestChanges::ConfigSetupService do
   def fixture_path(fixture)

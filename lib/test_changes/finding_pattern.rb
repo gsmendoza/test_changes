@@ -1,4 +1,4 @@
-require 'pathname'
+
 
 module TestChanges
   class FindingPattern

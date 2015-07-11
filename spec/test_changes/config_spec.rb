@@ -1,8 +1,4 @@
-require 'fileutils'
-require 'yaml'
 require 'spec_helper'
-
-require 'test_changes/config'
 
 describe TestChanges::Config do
   let(:runner_name) { 'rspec' }

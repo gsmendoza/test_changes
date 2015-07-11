@@ -1,7 +1,5 @@
 require 'spec_helper'
 
-require 'test_changes/find_runner_service'
-
 describe TestChanges::FindRunnerService do
   let(:default_runner_name) { 'rspec' }
 

@@ -1,9 +1,6 @@
 #!/usr/bin/env ruby
 
-require 'test_changes/argv_wrapper'
-require 'test_changes/client'
-require 'test_changes/config_setup_service'
-require 'test_changes/find_runner_service'
+require 'test_changes'
 
 argv_wrapper = TestChanges::ARGVWrapper.new(ARGV)
 config = TestChanges::ConfigSetupService.call

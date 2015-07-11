@@ -1,6 +1,3 @@
-require 'test_changes/ignore_excluded_files_service'
-require 'test_changes/config_setup_service'
-
 module TestChanges
   class Runner
     def initialize(

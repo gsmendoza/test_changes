@@ -1,6 +1,3 @@
-require 'slop'
-require 'test_changes'
-
 module TestChanges
   class ARGVWrapper
     attr_reader :argv

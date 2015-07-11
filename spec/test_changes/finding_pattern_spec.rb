@@ -1,7 +1,5 @@
 require 'spec_helper'
 
-require 'test_changes/finding_pattern'
-
 describe TestChanges::FindingPattern do
   let(:matching_pattern) { %r{^lib/test_changes\.rb} }
 
