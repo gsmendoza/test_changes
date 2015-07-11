@@ -1,3 +1,5 @@
+require 'pathname'
+
 module TestChanges
   class FindingPattern
     attr_reader :matching_pattern, :substitution_patterns
