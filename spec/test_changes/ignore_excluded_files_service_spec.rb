@@ -1,5 +1,7 @@
 require 'spec_helper'
 
+require 'test_changes/ignore_excluded_files_service'
+
 describe TestChanges::IgnoreExcludedFilesService do
   let(:matching_path) do
     'spec/fixtures/sample/spec/test_changes/version_spec.rb'
@@ -14,6 +16,16 @@ describe TestChanges::IgnoreExcludedFilesService do
 
   let(:service) do
     described_class.new(exclusion_patterns)
+  end
+
+  describe '#initialize' do
+    context "where exclusion_patterns is nil" do
+      let(:exclusion_patterns) { nil }
+
+      it "sets it to empty array" do
+        expect(service.exclusion_patterns).to eq([])
+      end
+    end
   end
 
   describe '#call(files)' do
