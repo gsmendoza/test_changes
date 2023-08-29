@@ -1,5 +1,10 @@
 ## master
 
+## 0.4.0
+
+* Loosen slop dependency.
+* Test gem against Ruby 3.1.2 and Slop 4.10.1.
+
 ## 0.3.2
 
 * Update slop to 4.2.
