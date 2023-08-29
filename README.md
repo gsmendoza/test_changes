@@ -81,8 +81,8 @@ test-changes -r rspec -c HEAD^ -- --format=documentation
 
 ## Known to work on
 
-* Ruby 2.0.0
-* Git 2.3.5
+* Ruby 3.1.2
+* Git 2.34.1
 
 ## Development
 
